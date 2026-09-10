@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Face Your Power — 12-Week Practice Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0D1E;
+    --bg-grad:#0D1230;
+    --panel:#12163076;
+    --panel-solid:#131834;
+    --panel-alt:#191F42;
+    --border:#272E56;
+    --border-soft:#1D2344;
+    --violet:#8C6CEA;
+    --violet-deep:#5B3FB0;
+    --violet-soft:#4A3B85;
+    --violet-light:#CBBBFA;
+    --ink:#F3F1EA;
+    --ink-dim:#A6ABCB;
+    --ink-faint:#5D6390;
+    --phase-foundation:#5B6089;
+    --phase-prepare:#8C6CEA;
+    --phase-perform:#6C4FC7;
+    --phase-pursue:#432E86;
+    --radius:16px;
+    --radius-sm:10px;
+    --shadow:0 20px 60px -20px rgba(0,0,0,.6);
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    font-family:'Outfit',system-ui,-apple-system,sans-serif;
+    background:
+      radial-gradient(1100px 500px at 8% -10%, #1B2354 0%, transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, #241947 0%, transparent 55%),
+      linear-gradient(180deg,var(--bg) 0%, #080A18 100%);
+    color:var(--ink);
+    min-height:100vh;
+    line-height:1.5;
+  }
+  h1,h2,h3,h4{margin:0;font-weight:600;letter-spacing:-.01em;}
+  p{margin:0;}
+  button{font-family:inherit;}
+  ::selection{background:var(--violet-soft);color:var(--ink);}
+  a{color:var(--violet-light);}
+
+  .app{max-width:920px;margin:0 auto;padding:0 18px 100px;}
+
+  /* ---------- Header ---------- */
+  header.topbar{
+    padding:34px 4px 20px;
+    display:flex;align-items:flex-start;justify-content:space-between;gap:16px;
+  }
+  .brand{display:flex;gap:14px;align-items:center;}
+  .mark{width:40px;height:40px;flex:none;}
+  .wordmark{font-size:15px;font-weight:700;letter-spacing:.14em;color:var(--ink);}
+  .wordmark small{display:block;font-size:11.5px;font-weight:400;letter-spacing:.03em;color:var(--ink-dim);margin-top:3px;}
+  .settings-btn{
+    background:transparent;border:1px solid var(--border);color:var(--ink-dim);
+    border-radius:999px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;
+    cursor:pointer;transition:border-color .15s, color .15s;
+  }
+  .settings-btn:hover{color:var(--ink);border-color:var(--violet);}
+  .settings-btn svg{width:17px;height:17px;}
+
+  /* ---------- Tabs ---------- */
+  nav.tabs{
+    display:flex;gap:6px;overflow-x:auto;padding:4px 2px 14px;
+    -ms-overflow-style:none;scrollbar-width:none;position:sticky;top:0;z-index:20;
+    background:linear-gradient(180deg, #0A0D1E 78%, transparent);
+    padding-top:10px;margin-top:-6px;
+  }
+  nav.tabs::-webkit-scrollbar{display:none;}
+  .tab-btn{
+    flex:none;
+    background:var(--panel-solid);border:1px solid var(--border-soft);
+    color:var(--ink-dim);
+    padding:10px 16px;border-radius:999px;font-size:13.5px;font-weight:500;
+    cursor:pointer;white-space:nowrap;transition:all .15s;
+  }
+  .tab-btn:hover{color:var(--ink);}
+  .tab-btn.active{
+    background:linear-gradient(135deg,var(--violet) 0%, var(--violet-deep) 100%);
+    color:#fff;border-color:transparent;
+  }
+
+  .view{display:none;animation:fade .35s ease;}
+  .view.active{display:block;}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+  /* ---------- Generic building blocks ---------- */
+  .card{
+    background:var(--panel-solid);
+    border:1px solid var(--border-soft);
+    border-radius:var(--radius);
+    padding:22px;
+    margin-bottom:16px;
+  }
+  .card h3{font-size:16px;margin-bottom:4px;}
+  .muted{color:var(--ink-dim);font-size:13.5px;}
+  .eyebrow{color:var(--violet-light);font-size:12px;font-weight:600;letter-spacing:.06em;margin-bottom:6px;}
+
+  label{display:block;font-size:12.5px;color:var(--ink-dim);margin:0 0 6px;font-weight:500;}
+  input[type=text],input[type=date],textarea,select{
+    width:100%;background:var(--panel-alt);border:1px solid var(--border);
+    color:var(--ink);border-radius:var(--radius-sm);padding:11px 12px;
+    font-family:inherit;font-size:14.5px;margin-bottom:14px;transition:border-color .15s;
+  }
+  input:focus,textarea:focus,select:focus{outline:none;border-color:var(--violet);}
+  textarea{resize:vertical;min-height:64px;}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  @media(max-width:520px){.field-row{grid-template-columns:1fr;}}
+
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    background:linear-gradient(135deg,var(--violet) 0%, var(--violet-deep) 100%);
+    color:#fff;border:none;padding:12px 22px;border-radius:999px;
+    font-size:14px;font-weight:600;cursor:pointer;transition:filter .15s, transform .1s;
+  }
+  .btn:hover{filter:brightness(1.08);}
+  .btn:active{transform:scale(.98);}
+  .btn.ghost{
+    background:transparent;border:1px solid var(--border);color:var(--ink-dim);
+  }
+  .btn.ghost:hover{color:var(--ink);border-color:var(--violet);}
+  .btn.small{padding:7px 14px;font-size:12.5px;}
+  .btn.danger{background:transparent;border:1px solid #4A2A3E;color:#D98BA6;}
+
+  .entry-list{display:flex;flex-direction:column;gap:10px;margin-top:14px;}
+  .entry{
+    background:var(--panel-alt);border:1px solid var(--border);border-radius:var(--radius-sm);
+    padding:13px 15px;
+  }
+  .entry-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:4px;}
+  .entry-date{font-size:12px;color:var(--violet-light);font-weight:600;}
+  .entry-tag{font-size:11px;color:var(--ink-faint);}
+  .entry-body{font-size:14px;color:var(--ink);white-space:pre-wrap;}
+  .entry-del{background:none;border:none;color:var(--ink-faint);cursor:pointer;font-size:12px;padding:2px 4px;}
+  .entry-del:hover{color:#D98BA6;}
+  .empty-state{color:var(--ink-faint);font-size:13.5px;padding:18px 4px;text-align:center;}
+
+  /* ---------- Overview hero ---------- */
+  .hero{
+    border:1px solid var(--border-soft);border-radius:20px;
+    background:linear-gradient(160deg, #171B42 0%, #10122B 100%);
+    padding:28px 22px 22px;margin-bottom:18px;position:relative;overflow:hidden;
+  }
+  .hero-kicker{color:var(--violet-light);font-size:12px;font-weight:600;letter-spacing:.08em;margin-bottom:8px;}
+  .hero h2{font-size:22px;line-height:1.3;max-width:520px;margin-bottom:4px;}
+  .hero .sub{color:var(--ink-dim);font-size:14px;margin-top:8px;max-width:480px;}
+
+  .arc-wrap{margin-top:26px;overflow-x:auto;padding-bottom:6px;}
+  .arc{display:flex;align-items:flex-end;gap:0;min-width:560px;position:relative;height:120px;}
+  .arc-node{flex:1;display:flex;flex-direction:column;align-items:center;position:relative;cursor:pointer;background:none;border:none;padding:0;}
+  .arc-node .line{position:absolute;top:38px;left:50%;width:100%;height:2px;background:var(--border);z-index:0;}
+  .arc-node:last-child .line{display:none;}
+  .dot{
+    width:22px;height:22px;border-radius:50%;border:2px solid var(--border);
+    background:var(--panel-alt);z-index:1;transition:all .2s;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .arc-node.done .dot{background:var(--phase-color,var(--violet));border-color:var(--phase-color,var(--violet));box-shadow:0 0 0 4px color-mix(in srgb, var(--phase-color,var(--violet)) 25%, transparent);}
+  .arc-node.current .dot{border-color:var(--violet-light);transform:scale(1.25);}
+  .arc-node.future .dot{opacity:.45;}
+  .wk-label{margin-top:10px;font-size:10.5px;color:var(--ink-faint);font-weight:500;}
+  .arc-node.current .wk-label{color:var(--ink);font-weight:700;}
+  .phase-tick{position:absolute;top:-16px;font-size:9.5px;letter-spacing:.06em;color:var(--ink-faint);text-transform:uppercase;}
+
+  .focus-panel{
+    margin-top:20px;background:var(--panel-alt);border:1px solid var(--border);
+    border-radius:var(--radius-sm);padding:16px 18px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;
+  }
+  .focus-panel .ftitle{font-size:13px;color:var(--ink-dim);}
+  .focus-panel .fmod{font-size:16.5px;font-weight:600;margin-top:2px;}
+
+  .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px;}
+  @media(max-width:560px){.stat-grid{grid-template-columns:repeat(2,1fr);}}
+  .stat{background:var(--panel-solid);border:1px solid var(--border-soft);border-radius:var(--radius-sm);padding:16px;}
+  .stat .num{font-size:26px;font-weight:700;color:var(--violet-light);}
+  .stat .lbl{font-size:12px;color:var(--ink-dim);margin-top:2px;}
+
+  .tally-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border-soft);font-size:13.5px;}
+  .tally-row:last-child{border-bottom:none;}
+  .tally-row .name{color:var(--ink);}
+  .tally-row .phase-chip{font-size:10px;color:var(--ink-faint);margin-left:8px;}
+  .tally-row .count{font-weight:700;color:var(--violet-light);min-width:26px;text-align:right;}
+
+  /* ---------- Accordion (Live Practice) ---------- */
+  .acc{border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:10px;overflow:hidden;background:var(--panel-alt);}
+  .acc-head{
+    display:flex;justify-content:space-between;align-items:center;padding:14px 16px;cursor:pointer;user-select:none;
+  }
+  .acc-head .t{font-size:14px;font-weight:600;}
+  .acc-head .st{font-size:12px;color:var(--ink-faint);margin-top:2px;}
+  .acc-head .chev{transition:transform .2s;color:var(--ink-faint);}
+  .acc.open .chev{transform:rotate(180deg);}
+  .acc-body{padding:0 16px 16px;display:none;}
+  .acc.open .acc-body{display:block;}
+
+  /* ---------- Reflection module cards ---------- */
+  .refl-card{margin-bottom:12px;}
+  .refl-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+  .refl-head .badge{font-size:10.5px;padding:3px 9px;border-radius:999px;color:#fff;}
+
+  /* ---------- Table (Moment Log) ---------- */
+  .mlog-entry{background:var(--panel-alt);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:10px;}
+  .mlog-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px 18px;font-size:13px;margin-top:8px;}
+  @media(max-width:520px){.mlog-grid{grid-template-columns:1fr;}}
+  .mlog-grid div span{display:block;color:var(--ink-faint);font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;margin-top:6px;}
+
+  /* ---------- Modal ---------- */
+  .modal-bg{
+    position:fixed;inset:0;background:rgba(6,7,18,.72);backdrop-filter:blur(3px);
+    display:none;align-items:center;justify-content:center;z-index:50;padding:20px;
+  }
+  .modal-bg.open{display:flex;}
+  .modal{
+    background:var(--panel-solid);border:1px solid var(--border-soft);border-radius:var(--radius);
+    padding:24px;max-width:380px;width:100%;
+  }
+  .modal h3{margin-bottom:6px;}
+  .modal .muted{margin-bottom:16px;display:block;}
+  .modal-actions{display:flex;gap:8px;margin-top:6px;justify-content:flex-end;flex-wrap:wrap;}
+
+  .foot-note{text-align:center;color:var(--ink-faint);font-size:12px;margin-top:34px;letter-spacing:.02em;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important;transition:none !important;}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <header class="topbar">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 48 48" fill="none">
+        <path d="M24 24C24 24 22 8 12 8C4 8 3 18 9 21C14 23.5 21 24 24 24Z" fill="#8C6CEA" fill-opacity=".85"/>
+        <path d="M24 24C24 24 26 8 36 8C44 8 45 18 39 21C34 23.5 27 24 24 24Z" fill="#CBBBFA" fill-opacity=".75"/>
+        <path d="M24 24C24 24 22 41 13 41C6 41 5 32 11 29C15.5 26.8 21 24.5 24 24Z" fill="#5B3FB0" fill-opacity=".9"/>
+        <path d="M24 24C24 24 26 41 35 41C42 41 43 32 37 29C32.5 26.8 27 24.5 24 24Z" fill="#8C6CEA" fill-opacity=".9"/>
+        <line x1="24" y1="10" x2="24" y2="40" stroke="#0A0D1E" stroke-width="2"/>
+      </svg>
+      <div class="wordmark">FACE YOUR POWER
+        <small>12-Week Practice Tracker</small>
+      </div>
+    </div>
+    <button class="settings-btn" id="btnSettings" title="Settings" aria-label="Settings">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06A1.65 1.65 0 004.6 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 4.6a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09A1.65 1.65 0 0015 4.6a1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+    </button>
+  </header>
+
+  <nav class="tabs" id="tabs">
+    <button class="tab-btn active" data-view="overview">Overview</button>
+    <button class="tab-btn" data-view="regbridge">Regulation Bridge</button>
+    <button class="tab-btn" data-view="modulelog">Module Log</button>
+    <button class="tab-btn" data-view="reflection">Reflection</button>
+    <button class="tab-btn" data-view="livepractice">Live Practice</button>
+    <button class="tab-btn" data-view="momentlog">Moment Log</button>
+  </nav>
+
+  <main>
+
+    <!-- ========== OVERVIEW ========== -->
+    <section id="overview" class="view active">
+      <div class="hero">
+        <div class="hero-kicker">SEE. FREE. GO.</div>
+        <h2>Mental strength isn't a crisis plan. It's a muscle — trained daily, on purpose.</h2>
+        <p class="sub">This is your 12-week training arc through PREPARE, PERFORM and PURSUE. Log every practice — even the short version counts. The count is the point.</p>
+
+        <div class="arc-wrap">
+          <div class="arc" id="arc"></div>
+        </div>
+
+        <div class="focus-panel" id="focusPanel"></div>
+      </div>
+
+      <div class="stat-grid" id="statGrid"></div>
+
+      <div class="card">
+        <h3>Module consistency</h3>
+        <p class="muted">Updates automatically as you log.</p>
+        <div id="tallyList" style="margin-top:10px;"></div>
+      </div>
+    </section>
+
+    <!-- ========== REGULATION BRIDGE ========== -->
+    <section id="regbridge" class="view">
+      <div class="card">
+        <div class="eyebrow">CORE TOOL — PRACTICED THROUGHOUT ALL 12 WEEKS</div>
+        <h3>Regulation Bridge Log</h3>
+        <p class="muted">Log it every time you practice the Regulation Bridge — the short version counts just as much as the long one.</p>
+        <form id="formRegBridge" style="margin-top:18px;">
+          <div class="field-row">
+            <div><label for="rbDate">Date</label><input type="date" id="rbDate" required></div>
+            <div><label for="rbNote">How it went (one word is enough)</label><input type="text" id="rbNote" placeholder="e.g. calm, easy, hard to focus"></div>
+          </div>
+          <button class="btn" type="submit">Log this practice</button>
+        </form>
+      </div>
+      <div class="card">
+        <h3>Your log</h3>
+        <div class="entry-list" id="rbList"></div>
+      </div>
+    </section>
+
+    <!-- ========== MODULE LOG ========== -->
+    <section id="modulelog" class="view">
+      <div class="card">
+        <div class="eyebrow">SEE × FREE × GO — ACROSS PREPARE, PERFORM, PURSUE</div>
+        <h3>Module Log</h3>
+        <p class="muted">Add a row every time you practice an exercise within a module.</p>
+        <form id="formModuleLog" style="margin-top:18px;">
+          <div class="field-row">
+            <div><label for="mlDate">Date</label><input type="date" id="mlDate" required></div>
+            <div><label for="mlModule">Module</label>
+              <select id="mlModule" required></select>
+            </div>
+          </div>
+          <div class="field-row">
+            <div><label for="mlReps">Reps</label><input type="text" id="mlReps" placeholder="1" inputmode="numeric"></div>
+            <div><label for="mlNote">One thing to remember</label><input type="text" id="mlNote" placeholder="What landed this time?"></div>
+          </div>
+          <button class="btn" type="submit">Log this rep</button>
+        </form>
+      </div>
+      <div class="card">
+        <h3>Your log</h3>
+        <div class="entry-list" id="mlList"></div>
+      </div>
+    </section>
+
+    <!-- ========== REFLECTION ========== -->
+    <section id="reflection" class="view">
+      <div class="card">
+        <div class="eyebrow">MY REFLECTION</div>
+        <h3>What I want to remember</h3>
+        <p class="muted">One line per module is enough. Come back and update it any time — this is a living page, not a test.</p>
+      </div>
+      <div id="reflList"></div>
+    </section>
+
+    <!-- ========== LIVE PRACTICE ========== -->
+    <section id="livepractice" class="view">
+      <div class="card">
+        <div class="eyebrow">SEE WHAT IS HAPPENING. FREE WHAT GETS IN THE WAY. GO WITH WHAT YOU NEED.</div>
+        <h3>Live Practice Tracker</h3>
+        <p class="muted">Before you can change something, you first have to see it clearly. You don't have to solve it immediately — first, notice it. A few honest words are enough.</p>
+      </div>
+
+      <form id="formLive">
+        <div id="liveAccordion"></div>
+        <button class="btn" type="submit" style="margin-top:6px;">Save this session</button>
+      </form>
+
+      <div class="card" style="margin-top:22px;">
+        <h3>Past sessions</h3>
+        <div class="entry-list" id="liveList"></div>
+      </div>
+    </section>
+
+    <!-- ========== MOMENT LOG ========== -->
+    <section id="momentlog" class="view">
+      <div class="card">
+        <div class="eyebrow">MOMENT LOG</div>
+        <h3>Capture a moment</h3>
+        <p class="muted">30–60 seconds. Notice it → capture it → keep training.</p>
+        <form id="formMoment" style="margin-top:18px;">
+          <div class="field-row">
+            <div><label for="mmDate">Date</label><input type="date" id="mmDate" required></div>
+            <div><label for="mmStage">Stage</label>
+              <select id="mmStage">
+                <option>Prepare</option><option>Perform</option><option>Pursue</option>
+              </select>
+            </div>
+          </div>
+          <label for="mmSituation">Situation / trigger</label><textarea id="mmSituation" placeholder="What happened?"></textarea>
+          <div class="field-row">
+            <div><label for="mmEmotion">Emotion</label><input type="text" id="mmEmotion" placeholder="What did I feel?"></div>
+            <div><label for="mmThought">Thought</label><input type="text" id="mmThought" placeholder="What went through my mind?"></div>
+          </div>
+          <div class="field-row">
+            <div><label for="mmBody">Body</label><input type="text" id="mmBody" placeholder="What did I notice physically?"></div>
+            <div><label for="mmReaction">Reaction</label><input type="text" id="mmReaction" placeholder="What did I do next?"></div>
+          </div>
+          <label for="mmPerformance">Performance impact</label><input type="text" id="mmPerformance" placeholder="What changed in my performance?">
+          <label for="mmPattern">Pattern / belief</label><input type="text" id="mmPattern" placeholder="What belief keeps showing up?">
+          <div class="field-row">
+            <div><label for="mmExercise">Exercise</label><input type="text" id="mmExercise" placeholder="Which FYP exercise could help?"></div>
+            <div><label for="mmResponse">Desired response</label><input type="text" id="mmResponse" placeholder="How do I want to respond next time?"></div>
+          </div>
+          <button class="btn" type="submit">Save this moment</button>
+        </form>
+      </div>
+      <div class="card">
+        <h3>Your moments</h3>
+        <div id="mmList"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <p class="foot-note">Train your mind. Know your patterns. Face Your Power. — Your entries are stored only on this device.</p>
+</div>
+
+<!-- Settings modal -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <h3>Your training start date</h3>
+    <span class="muted">This sets week 1 of your 12-week arc. Changing it re-maps your current week — your logged entries stay untouched.</span>
+    <label for="startDateInput">Start date</label>
+    <input type="date" id="startDateInput">
+    <div class="modal-actions">
+      <button class="btn ghost small" id="btnExport">Export as JSON</button>
+      <button class="btn ghost small" id="btnExportXlsx">Export as Excel</button>
+      <button class="btn danger small" id="btnReset">Reset all data</button>
+      <button class="btn small" id="btnSaveStart">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------------- Data model ---------------- */
+  var MODULES = [
+    {id:'see-prepare',  phase:'prepare', name:'SEE × Prepare'},
+    {id:'free-prepare', phase:'prepare', name:'FREE × Prepare'},
+    {id:'go-prepare',   phase:'prepare', name:'GO × Prepare'},
+    {id:'see-perform',  phase:'perform', name:'SEE × Perform'},
+    {id:'free-perform', phase:'perform', name:'FREE × Perform'},
+    {id:'go-perform',   phase:'perform', name:'GO × Perform'},
+    {id:'see-pursue',   phase:'pursue',  name:'SEE × Pursue'},
+    {id:'free-pursue',  phase:'pursue',  name:'FREE × Pursue'},
+    {id:'go-pursue',    phase:'pursue',  name:'GO × Pursue'}
+  ];
+
+  var WEEKS = [
+    {n:1,  phase:'foundation', title:'Foundation', focus:'Regulation Bridge — build the daily habit', moduleId:null},
+    {n:2,  phase:'prepare',    title:'Prepare',     focus:'SEE × Prepare',  moduleId:'see-prepare'},
+    {n:3,  phase:'prepare',    title:'Prepare',     focus:'FREE × Prepare', moduleId:'free-prepare'},
+    {n:4,  phase:'prepare',    title:'Prepare',     focus:'GO × Prepare',   moduleId:'go-prepare'},
+    {n:5,  phase:'foundation', title:'Integrate',   focus:'Review — what changed in your Prepare state?', moduleId:null},
+    {n:6,  phase:'perform',    title:'Perform',     focus:'SEE × Perform',  moduleId:'see-perform'},
+    {n:7,  phase:'perform',    title:'Perform',     focus:'FREE × Perform', moduleId:'free-perform'},
+    {n:8,  phase:'perform',    title:'Perform',     focus:'GO × Perform',   moduleId:'go-perform'},
+    {n:9,  phase:'foundation', title:'Integrate',   focus:'Review — what changed under pressure?', moduleId:null},
+    {n:10, phase:'pursue',     title:'Pursue',      focus:'SEE × Pursue',   moduleId:'see-pursue'},
+    {n:11, phase:'pursue',     title:'Pursue',      focus:'FREE × Pursue',  moduleId:'free-pursue'},
+    {n:12, phase:'pursue',     title:'Pursue',      focus:'GO × Pursue — and your 12-week reflection', moduleId:'go-pursue'}
+  ];
+
+  var PHASE_COLOR = {foundation:'#5B6089', prepare:'#8C6CEA', perform:'#6C4FC7', pursue:'#432E86'};
+  var PHASE_LABEL = {foundation:'Foundation', prepare:'Prepare', perform:'Perform', pursue:'Pursue'};
+
+  var LIVE_SECTIONS = [
+    {id:'today', title:'1. Today', sub:'Set the scene', fields:[
+      {id:'date', label:'Date', type:'date', ph:''},
+      {id:'type', label:'Type of training', type:'text', ph:'e.g. on-ice, gym, match day, travel'},
+      {id:'where', label:'Where am I?', type:'text', ph:'Camp, home base, competition site…'}
+    ]},
+    {id:'checkin', title:'2. Quick check-in', sub:'Be specific — "bad" or "stressed" is a start, not the answer', fields:[
+      {id:'emotion', label:'Emotion', type:'text', ph:'Which emotion(s) am I noticing?'},
+      {id:'trigger', label:'Trigger', type:'text', ph:'What happened just before I felt this way?'},
+      {id:'thought', label:'Thought', type:'text', ph:'What am I thinking right now?'},
+      {id:'body', label:'Body', type:'text', ph:'What do I notice in my body?'}
+    ]},
+    {id:'capture', title:'3. Capture the moment', sub:'30–60 seconds. Notice it → capture it → keep training', fields:[
+      {id:'situation', label:'Situation / trigger', type:'textarea', ph:'What happened?'},
+      {id:'emotion2', label:'Emotion', type:'text', ph:'What did I feel?'},
+      {id:'thought2', label:'Thought', type:'text', ph:'What went through my mind?'},
+      {id:'body2', label:'Body', type:'text', ph:'What did I notice physically?'},
+      {id:'reaction', label:'Reaction', type:'text', ph:'What did I do next?'},
+      {id:'performance', label:'Performance', type:'text', ph:'What changed in my performance?'}
+    ]},
+    {id:'see', title:'4. SEE — what is happening?', sub:"You can't change what you haven't noticed yet", fields:[
+      {id:'pattern', label:'Pattern', type:'text', ph:'What am I noticing about this moment?'},
+      {id:'trigger2', label:'Trigger', type:'text', ph:'What tends to trigger this response?'},
+      {id:'automatic', label:'Automatic response', type:'text', ph:'What belief or thought appears automatically?'},
+      {id:'past', label:'Past connection', type:'text', ph:'Does this remind me of something before?'},
+      {id:'impact', label:'Impact', type:'text', ph:'Focus, energy, confidence, technique, performance?'}
+    ]},
+    {id:'free', title:'5. FREE — what is getting in the way?', sub:'Once the pattern is visible, you can work with it', fields:[
+      {id:'blocker', label:'What gets in the way?', type:'text', ph:'A belief, emotion, reaction, trigger?'},
+      {id:'exercise', label:'Exercise', type:'text', ph:'Which FYP exercise could help?'},
+      {id:'reframe', label:'Choose again', type:'text', ph:'Not CTRL+C → CTRL+V. CTRL+Z: what could I respond to differently?'}
+    ]},
+    {id:'go', title:'6. GO — what do I want instead?', sub:'Train the response and state that would support your performance', fields:[
+      {id:'response', label:'Response', type:'text', ph:'How do I want to respond next time?'},
+      {id:'state', label:'State', type:'text', ph:'What state do I want to access instead?'},
+      {id:'performance2', label:'Performance', type:'text', ph:'What would be more useful for my performance?'}
+    ]},
+    {id:'ppi', title:'7. Prepare → Perform → Integrate', sub:'Use wherever it fits your training day', fields:[
+      {id:'prepare', label:'Prepare', type:'textarea', ph:'Before: emotions, thoughts, expectations, nerves?'},
+      {id:'perform', label:'Perform', type:'textarea', ph:'During: what happened? What shifted your state or performance?'},
+      {id:'integrate', label:'Integrate', type:'textarea', ph:'After: what did I learn? What pattern did I notice?'}
+    ]},
+    {id:'post', title:'8. Post-training reflection', sub:'Focus on specific moments — not just "good" or "bad"', fields:[
+      {id:'strongest', label:'Strongest moment', type:'text', ph:'When did I feel strongest?'},
+      {id:'shift', label:'Shift', type:'text', ph:'When did something shift?'},
+      {id:'trigger3', label:'Trigger', type:'text', ph:'What triggered the shift?'},
+      {id:'notice', label:'Notice', type:'text', ph:'Thoughts, emotions, body, behaviour?'},
+      {id:'next', label:'Next', type:'text', ph:'Something here I want to work on?'}
+    ]},
+    {id:'pattern-spot', title:'9. Pattern spotting', sub:'Recurring triggers become easier to recognize over time', fields:[
+      {id:'frequency', label:'Frequency', type:'text', ph:'First time, a few times, or regular?'},
+      {id:'trigger4', label:'Trigger', type:'text', ph:'What keeps showing up as a trigger?'},
+      {id:'automatic2', label:'Automatic', type:'text', ph:'What state / belief / reaction does it create?'},
+      {id:'performance3', label:'Performance', type:'text', ph:'What happens to my performance?'},
+      {id:'trained', label:'Trained response', type:'text', ph:'What response do I want to train instead?'}
+    ]},
+    {id:'takeaway', title:'10. One thing to take with me', sub:'Keep it small — one insight or one next step is enough', fields:[
+      {id:'remember', label:'Remember', type:'text', ph:'What do I want to remember from today?'},
+      {id:'nextstep', label:'Next step', type:'text', ph:'What is the one small thing to notice, practise, or choose next time?'}
+    ]}
+  ];
+
+  /* ---------------- State ---------------- */
+  var STORE_KEY = 'fyp_tracker_v1';
+  var state = loadState();
+
+  function defaultState(){
+    return { startDate:null, regBridge:[], moduleLog:[], reflections:{}, livePractice:[], momentLog:[] };
+  }
+  function loadState(){
+    try{
+      var raw = localStorage.getItem(STORE_KEY);
+      if(!raw) return defaultState();
+      var parsed = JSON.parse(raw);
+      var d = defaultState();
+      for(var k in d){ if(parsed[k] !== undefined) d[k] = parsed[k]; }
+      return d;
+    }catch(e){ return defaultState(); }
+  }
+  function saveState(){
+    try{ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }catch(e){}
+  }
+
+  function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+  function todayStr(){ return new Date().toISOString().slice(0,10); }
+  function fmtDate(s){
+    if(!s) return '';
+    var d = new Date(s+'T00:00:00');
+    if(isNaN(d)) return s;
+    return d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+  }
+  function daysBetween(a,b){
+    var A = new Date(a+'T00:00:00'), B = new Date(b+'T00:00:00');
+    return Math.floor((B-A)/86400000);
+  }
+  function weekOfDate(dateStr){
+    if(!state.startDate || !dateStr) return null;
+    var diff = daysBetween(state.startDate, dateStr);
+    if(diff < 0) return null;
+    var w = Math.floor(diff/7)+1;
+    return w >= 1 && w <= 12 ? w : (w>12?12:null);
+  }
+  function currentWeek(){
+    if(!state.startDate) return null;
+    var w = weekOfDate(todayStr());
+    if(w===null){
+      var diff = daysBetween(state.startDate, todayStr());
+      if(diff<0) return null;
+      return 12;
+    }
+    return w;
+  }
+  function weekHasEntries(n){
+    var all = []
+      .concat(state.regBridge.map(function(e){return e.date;}))
+      .concat(state.moduleLog.map(function(e){return e.date;}))
+      .concat(state.livePractice.map(function(e){return e.date;}))
+      .concat(state.momentLog.map(function(e){return e.date;}));
+    for(var i=0;i<all.length;i++){ if(weekOfDate(all[i])===n) return true; }
+    return false;
+  }
+
+  /* ---------------- Nav ---------------- */
+  var tabBtns = document.querySelectorAll('.tab-btn');
+  tabBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){ showView(btn.getAttribute('data-view')); });
+  });
+  function showView(id){
+    document.querySelectorAll('.view').forEach(function(v){ v.classList.toggle('active', v.id===id); });
+    tabBtns.forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-view')===id); });
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  /* ---------------- Overview render ---------------- */
+  function renderOverview(){
+    var cw = currentWeek();
+    var arc = document.getElementById('arc');
+    arc.innerHTML = '';
+    WEEKS.forEach(function(w){
+      var node = document.createElement('button');
+      node.type='button';
+      node.className = 'arc-node';
+      if(cw!==null){
+        if(w.n < cw) node.classList.add('done');
+        else if(w.n === cw) node.classList.add('current');
+        else node.classList.add('future');
+      }
+      if(weekHasEntries(w.n)) node.classList.add('done');
+      node.style.setProperty('--phase-color', PHASE_COLOR[w.phase]);
+      node.innerHTML = '<div class="line"></div>' +
+        (w.n===1?'<span class="phase-tick">Prepare</span>':'') +
+        (w.n===6?'<span class="phase-tick">Perform</span>':'') +
+        (w.n===10?'<span class="phase-tick">Pursue</span>':'') +
+        '<div class="dot"></div><div class="wk-label">W'+w.n+'</div>';
+      node.addEventListener('click', function(){ renderFocus(w.n); });
+      arc.appendChild(node);
+    });
+    renderFocus(cw || 1);
+    renderStats();
+    renderTally();
+  }
+
+  function renderFocus(n){
+    var w = WEEKS[n-1];
+    var panel = document.getElementById('focusPanel');
+    panel.innerHTML =
+      '<div><div class="ftitle">Week '+w.n+' — '+PHASE_LABEL[w.phase]+'</div><div class="fmod">'+w.focus+'</div></div>' +
+      (w.moduleId ? '<button class="btn small" id="jumpModule">Log it now</button>' : '<button class="btn ghost small" id="jumpReflect">Open reflection</button>');
+    var jm = document.getElementById('jumpModule');
+    if(jm) jm.addEventListener('click', function(){
+      showView('modulelog');
+      document.getElementById('mlModule').value = w.moduleId;
+    });
+    var jr = document.getElementById('jumpReflect');
+    if(jr) jr.addEventListener('click', function(){ showView('reflection'); });
+  }
+
+  function renderStats(){
+    var totalSessions = state.regBridge.length + state.moduleLog.length + state.livePractice.length + state.momentLog.length;
+    var cw = currentWeek();
+    var grid = document.getElementById('statGrid');
+    grid.innerHTML =
+      stat(state.regBridge.length, 'Regulation Bridge sessions') +
+      stat(totalSessions, 'Total logged sessions') +
+      stat(cw ? ('Week '+cw+' / 12') : '—', cw ? 'Current week' : 'Set your start date');
+  }
+  function stat(num,lbl){
+    return '<div class="stat"><div class="num">'+num+'</div><div class="lbl">'+lbl+'</div></div>';
+  }
+
+  function renderTally(){
+    var el = document.getElementById('tallyList');
+    var html = '';
+    MODULES.forEach(function(m){
+      var count = state.moduleLog.filter(function(e){ return e.module===m.id; }).length;
+      html += '<div class="tally-row"><span class="name">'+m.name+'<span class="phase-chip">'+PHASE_LABEL[m.phase]+'</span></span><span class="count">'+count+'</span></div>';
+    });
+    html += '<div class="tally-row"><span class="name">Regulation Bridge<span class="phase-chip">Core tool</span></span><span class="count">'+state.regBridge.length+'</span></div>';
+    el.innerHTML = html;
+  }
+
+  /* ---------------- Regulation Bridge ---------------- */
+  var formRB = document.getElementById('formRegBridge');
+  document.getElementById('rbDate').value = todayStr();
+  formRB.addEventListener('submit', function(e){
+    e.preventDefault();
+    state.regBridge.unshift({id:uid(), date:document.getElementById('rbDate').value, note:document.getElementById('rbNote').value.trim()});
+    saveState();
+    document.getElementById('rbNote').value='';
+    document.getElementById('rbDate').value = todayStr();
+    renderRegBridge(); renderOverview();
+  });
+  function renderRegBridge(){
+    var list = document.getElementById('rbList');
+    if(!state.regBridge.length){ list.innerHTML = '<div class="empty-state">No entries yet. Log your first Regulation Bridge practice above.</div>'; return; }
+    list.innerHTML = state.regBridge.map(function(e){
+      return '<div class="entry"><div class="entry-top"><span class="entry-date">'+fmtDate(e.date)+'</span>'+delBtn('regBridge', e.id)+'</div>' +
+        (e.note?'<div class="entry-body">'+esc(e.note)+'</div>':'') + '</div>';
+    }).join('');
+    wireDeletes();
+  }
+
+  /* ---------------- Module Log ---------------- */
+  var mlSelect = document.getElementById('mlModule');
+  mlSelect.innerHTML = MODULES.map(function(m){ return '<option value="'+m.id+'">'+m.name+'</option>'; }).join('');
+  document.getElementById('mlDate').value = todayStr();
+  document.getElementById('formModuleLog').addEventListener('submit', function(e){
+    e.preventDefault();
+    state.moduleLog.unshift({
+      id:uid(),
+      date:document.getElementById('mlDate').value,
+      module:document.getElementById('mlModule').value,
+      reps:document.getElementById('mlReps').value.trim() || '1',
+      note:document.getElementById('mlNote').value.trim()
+    });
+    saveState();
+    document.getElementById('mlReps').value='';
+    document.getElementById('mlNote').value='';
+    document.getElementById('mlDate').value = todayStr();
+    renderModuleLog(); renderOverview();
+  });
+  function moduleName(id){ var m=MODULES.filter(function(x){return x.id===id;})[0]; return m?m.name:id; }
+  function renderModuleLog(){
+    var list = document.getElementById('mlList');
+    if(!state.moduleLog.length){ list.innerHTML = '<div class="empty-state">No entries yet. Log your first rep above.</div>'; return; }
+    list.innerHTML = state.moduleLog.map(function(e){
+      return '<div class="entry"><div class="entry-top"><span class="entry-date">'+fmtDate(e.date)+'</span><span class="entry-tag">'+moduleName(e.module)+' · '+esc(e.reps)+' rep(s)</span>'+delBtn('moduleLog', e.id)+'</div>' +
+        (e.note?'<div class="entry-body">'+esc(e.note)+'</div>':'') + '</div>';
+    }).join('');
+    wireDeletes();
+  }
+
+  /* ---------------- Reflection ---------------- */
+  function renderReflection(){
+    var el = document.getElementById('reflList');
+    el.innerHTML = MODULES.map(function(m){
+      var val = state.reflections[m.id] || '';
+      return '<div class="card refl-card">' +
+        '<div class="refl-head"><h3>'+m.name+'</h3><span class="badge" style="background:'+PHASE_COLOR[m.phase]+'">'+PHASE_LABEL[m.phase]+'</span></div>' +
+        '<p class="muted" style="margin-bottom:10px;">What are you taking with you from this module?</p>' +
+        '<textarea data-mod="'+m.id+'" placeholder="A line, a shift, a phrase that stuck…">'+esc(val)+'</textarea>' +
+        '</div>';
+    }).join('');
+    el.querySelectorAll('textarea').forEach(function(ta){
+      ta.addEventListener('change', function(){
+        state.reflections[ta.getAttribute('data-mod')] = ta.value;
+        saveState();
+      });
+    });
+  }
+
+  /* ---------------- Live Practice ---------------- */
+  function renderLiveAccordion(){
+    var el = document.getElementById('liveAccordion');
+    el.innerHTML = LIVE_SECTIONS.map(function(sec, idx){
+      var fieldsHtml = sec.fields.map(function(f){
+        var tag = f.type==='textarea' ? 'textarea' : (f.type==='date' ? 'input type="date"' : 'input type="text"');
+        var close = f.type==='textarea' ? '</textarea>' : '';
+        var ph = f.type==='date' ? '' : ' placeholder="'+f.ph+'"';
+        return '<label for="live-'+f.id+'">'+f.label+'</label><'+tag+' id="live-'+f.id+'"'+ph+'>'+close;
+      }).join('');
+      return '<div class="acc'+(idx===0?' open':'')+'" data-idx="'+idx+'">' +
+        '<div class="acc-head"><div><div class="t">'+sec.title+'</div><div class="st">'+sec.sub+'</div></div><span class="chev">▾</span></div>' +
+        '<div class="acc-body">'+fieldsHtml+'</div></div>';
+    }).join('');
+    el.querySelectorAll('.acc-head').forEach(function(h){
+      h.addEventListener('click', function(){ h.parentElement.classList.toggle('open'); });
+    });
+    var dateField = document.getElementById('live-date');
+    if(dateField && !dateField.value) dateField.value = todayStr();
+  }
+  document.getElementById('formLive').addEventListener('submit', function(e){
+    e.preventDefault();
+    var entry = {id:uid(), ts:Date.now()};
+    LIVE_SECTIONS.forEach(function(sec){
+      sec.fields.forEach(function(f){
+        var el = document.getElementById('live-'+f.id);
+        entry[f.id] = el ? el.value.trim() : '';
+      });
+    });
+    if(!entry.date) entry.date = todayStr();
+    state.livePractice.unshift(entry);
+    saveState();
+    LIVE_SECTIONS.forEach(function(sec){
+      sec.fields.forEach(function(f){
+        var el = document.getElementById('live-'+f.id);
+        if(el) el.value = (f.id==='date') ? todayStr() : '';
+      });
+    });
+    document.querySelectorAll('#liveAccordion .acc').forEach(function(a,i){ a.classList.toggle('open', i===0); });
+    renderLiveList(); renderOverview();
+    window.scrollTo({top:document.getElementById('livepractice').offsetTop,behavior:'smooth'});
+  });
+  function renderLiveList(){
+    var list = document.getElementById('liveList');
+    if(!state.livePractice.length){ list.innerHTML = '<div class="empty-state">No sessions saved yet.</div>'; return; }
+    list.innerHTML = state.livePractice.map(function(e){
+      var summary = e.remember || e.pattern || e.situation || 'Session logged';
+      return '<div class="entry"><div class="entry-top"><span class="entry-date">'+fmtDate(e.date)+'</span>'+delBtn('livePractice', e.id)+'</div>' +
+        '<div class="entry-body">'+esc(summary)+'</div></div>';
+    }).join('');
+    wireDeletes();
+  }
+
+  /* ---------------- Moment Log ---------------- */
+  document.getElementById('mmDate').value = todayStr();
+  document.getElementById('formMoment').addEventListener('submit', function(e){
+    e.preventDefault();
+    var ids = ['Date','Stage','Situation','Emotion','Thought','Body','Reaction','Performance','Pattern','Exercise','Response'];
+    var entry = {
+      id:uid(),
+      date:document.getElementById('mmDate').value,
+      stage:document.getElementById('mmStage').value,
+      situation:document.getElementById('mmSituation').value.trim(),
+      emotion:document.getElementById('mmEmotion').value.trim(),
+      thought:document.getElementById('mmThought').value.trim(),
+      body:document.getElementById('mmBody').value.trim(),
+      reaction:document.getElementById('mmReaction').value.trim(),
+      performance:document.getElementById('mmPerformance').value.trim(),
+      pattern:document.getElementById('mmPattern').value.trim(),
+      exercise:document.getElementById('mmExercise').value.trim(),
+      response:document.getElementById('mmResponse').value.trim()
+    };
+    state.momentLog.unshift(entry);
+    saveState();
+    ['mmSituation','mmEmotion','mmThought','mmBody','mmReaction','mmPerformance','mmPattern','mmExercise','mmResponse'].forEach(function(id){
+      document.getElementById(id).value='';
+    });
+    document.getElementById('mmDate').value = todayStr();
+    renderMomentLog(); renderOverview();
+  });
+  function renderMomentLog(){
+    var list = document.getElementById('mmList');
+    if(!state.momentLog.length){ list.innerHTML = '<div class="empty-state">No moments captured yet.</div>'; return; }
+    list.innerHTML = state.momentLog.map(function(e){
+      return '<div class="mlog-entry"><div class="entry-top"><span class="entry-date">'+fmtDate(e.date)+'</span><span class="entry-tag">'+esc(e.stage)+'</span>'+delBtn('momentLog', e.id)+'</div>' +
+        (e.situation?'<div class="entry-body">'+esc(e.situation)+'</div>':'') +
+        '<div class="mlog-grid">' +
+          field('Emotion', e.emotion) + field('Thought', e.thought) + field('Body', e.body) + field('Reaction', e.reaction) +
+          field('Performance', e.performance) + field('Pattern / belief', e.pattern) + field('Exercise', e.exercise) + field('Desired response', e.response) +
+        '</div></div>';
+    }).join('');
+    wireDeletes();
+  }
+  function field(label,val){ if(!val) return ''; return '<div><span>'+label+'</span>'+esc(val)+'</div>'; }
+
+  /* ---------------- Shared: delete + escape ---------------- */
+  function delBtn(bucket,id){ return '<button class="entry-del" data-bucket="'+bucket+'" data-id="'+id+'">remove</button>'; }
+  function wireDeletes(){
+    document.querySelectorAll('.entry-del').forEach(function(btn){
+      btn.onclick = function(){
+        var bucket = btn.getAttribute('data-bucket'), id = btn.getAttribute('data-id');
+        state[bucket] = state[bucket].filter(function(e){ return e.id !== id; });
+        saveState();
+        renderAll();
+      };
+    });
+  }
+  function esc(s){
+    if(!s) return '';
+    return String(s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  /* ---------------- Settings modal ---------------- */
+  var modalBg = document.getElementById('modalBg');
+  document.getElementById('btnSettings').addEventListener('click', function(){
+    document.getElementById('startDateInput').value = state.startDate || '';
+    modalBg.classList.add('open');
+  });
+  modalBg.addEventListener('click', function(e){ if(e.target===modalBg) modalBg.classList.remove('open'); });
+  document.getElementById('btnSaveStart').addEventListener('click', function(){
+    var v = document.getElementById('startDateInput').value;
+    state.startDate = v || null;
+    saveState();
+    modalBg.classList.remove('open');
+    renderOverview();
+  });
+  document.getElementById('btnExport').addEventListener('click', function(){
+    var blob = new Blob([JSON.stringify(state,null,2)], {type:'application/json'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = 'face-your-power-tracker-export.json';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+  document.getElementById('btnReset').addEventListener('click', function(){
+    if(confirm('This clears every logged entry on this device. This cannot be undone. Continue?')){
+      state = defaultState();
+      saveState();
+      modalBg.classList.remove('open');
+      renderAll();
+    }
+  });
+
+  /* ---------------- Excel export (styled, documentation-ready) ---------------- */
+  document.getElementById('btnExportXlsx').addEventListener('click', function(){
+    var btn = this;
+    var original = btn.textContent;
+    btn.textContent = 'Preparing…';
+    btn.disabled = true;
+    ensureExcelJS(function(ok){
+      if(!ok){ btn.textContent = original; btn.disabled = false; return; }
+      buildWorkbook().then(function(){
+        btn.textContent = original;
+        btn.disabled = false;
+      }).catch(function(){
+        alert('Export failed. Please try again.');
+        btn.textContent = original;
+        btn.disabled = false;
+      });
+    });
+  });
+
+  function ensureExcelJS(cb){
+    if(window.ExcelJS){ cb(true); return; }
+    var s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js';
+    s.onload = function(){ cb(true); };
+    s.onerror = function(){
+      alert('Could not load the Excel export tool. Check your internet connection and try again.');
+      cb(false);
+    };
+    document.head.appendChild(s);
+  }
+
+  var XLS_VIOLET   = 'FF8C6CEA';
+  var XLS_VIOLET_D = 'FF5B3FB0';
+  var XLS_TINT     = 'FFEDE6FB';
+  var XLS_TINT_SOFT= 'FFF8F6FD';
+  var XLS_ZEBRA    = 'FFF3EEFC';
+  var XLS_INK      = 'FF262A45';
+  var XLS_INK_DIM  = 'FF6E7399';
+  var XLS_BORDER   = 'FFE7E2F5';
+
+  function colLetter(n){
+    var s='';
+    while(n>0){ var m=(n-1)%26; s=String.fromCharCode(65+m)+s; n=Math.floor((n-1)/26); }
+    return s;
+  }
+
+  function sheetBand(ws, colCount, title, subtitle){
+    ws.mergeCells(1,1,1,colCount);
+    var t = ws.getCell(1,1);
+    t.value = title;
+    t.font = {name:'Calibri', size:13, bold:true, color:{argb:'FF2C2158'}};
+    t.alignment = {vertical:'middle'};
+    t.fill = {type:'pattern', pattern:'solid', fgColor:{argb:XLS_TINT}};
+    ws.getRow(1).height = 24;
+
+    ws.mergeCells(2,1,2,colCount);
+    var s = ws.getCell(2,1);
+    s.value = subtitle;
+    s.font = {name:'Calibri', size:10, italic:true, color:{argb:XLS_INK_DIM}};
+    s.fill = {type:'pattern', pattern:'solid', fgColor:{argb:XLS_TINT_SOFT}};
+    ws.getRow(2).height = 17;
+  }
+
+  function dataSheet(wb, name, title, subtitle, headers, colDefs, rows, opts){
+    opts = opts || {};
+    var ws = wb.addWorksheet(name, {views:[{showGridLines:false}]});
+    sheetBand(ws, headers.length, title, subtitle);
+    var headerRow = 3;
+    headers.forEach(function(h,i){
+      var c = ws.getCell(headerRow, i+1);
+      c.value = h;
+      c.font = {name:'Calibri', size:10.5, bold:true, color:{argb:'FFFFFFFF'}};
+      c.fill = {type:'pattern', pattern:'solid', fgColor:{argb:XLS_VIOLET}};
+      c.alignment = {vertical:'middle', wrapText:true};
+      c.border = {bottom:{style:'thin', color:{argb:XLS_VIOLET_D}}};
+    });
+    ws.getRow(headerRow).height = 24;
+    colDefs.forEach(function(cd,i){ ws.getColumn(i+1).width = cd.width; });
+    ws.views = [{state:'frozen', xSplit: opts.freezeCol?1:0, ySplit:headerRow, showGridLines:false}];
+
+    if(!rows.length){
+      var er = ws.getCell(headerRow+1,1);
+      er.value = 'No entries logged yet.';
+      er.font = {italic:true, color:{argb:XLS_INK_DIM}};
+      return ws;
+    }
+    rows.forEach(function(rowArr, idx){
+      var r = headerRow + 1 + idx;
+      rowArr.forEach(function(val, c){
+        var cell = ws.getCell(r, c+1);
+        var def = colDefs[c] || {};
+        if(def.type==='date' && val){
+          cell.value = new Date(val+'T00:00:00');
+          cell.numFmt = 'dd mmm yyyy';
+        } else {
+          cell.value = val || '';
+        }
+        cell.alignment = {vertical:'top', wrapText: def.type==='wrap'};
+        cell.font = {name:'Calibri', size:10.5, color:{argb:XLS_INK}};
+        cell.border = {bottom:{style:'hair', color:{argb:XLS_BORDER}}};
+        if(idx % 2 === 1) cell.fill = {type:'pattern', pattern:'solid', fgColor:{argb:XLS_ZEBRA}};
+      });
+    });
+    ws.autoFilter = colLetter(1)+headerRow+':'+colLetter(headers.length)+headerRow;
+    return ws;
+  }
+
+  function buildWorkbook(){
+    var wb = new ExcelJS.Workbook();
+    wb.creator = 'Face Your Power';
+    wb.created = new Date();
+
+    /* --- Cover / Overview sheet --- */
+    var ov = wb.addWorksheet('Overview', {views:[{showGridLines:false}]});
+    ov.mergeCells(1,1,2,4);
+    var big = ov.getCell(1,1);
+    big.value = 'FACE YOUR POWER';
+    big.font = {name:'Calibri', size:20, bold:true, color:{argb:'FF2C2158'}};
+    big.fill = {type:'pattern', pattern:'solid', fgColor:{argb:XLS_TINT}};
+    big.alignment = {vertical:'middle'};
+    ov.mergeCells(3,1,3,4);
+    var sub = ov.getCell(3,1);
+    sub.value = '12-Week Practice Tracker — Documentation Export';
+    sub.font = {name:'Calibri', size:11, italic:true, color:{argb:XLS_INK_DIM}};
+    sub.fill = {type:'pattern', pattern:'solid', fgColor:{argb:XLS_TINT_SOFT}};
+    ov.getRow(1).height = 22; ov.getRow(2).height = 22; ov.getRow(3).height = 18;
+
+    var infoRows = [
+      ['Exported', new Date().toLocaleDateString('en-GB',{day:'2-digit',month:'long',year:'numeric'})],
+      ['Training start date', state.startDate ? fmtDate(state.startDate) : 'Not set'],
+      ['Current week', currentWeek() ? ('Week '+currentWeek()+' of 12') : '—']
+    ];
+    var r = 5;
+    infoRows.forEach(function(row){
+      ov.getCell(r,1).value = row[0];
+      ov.getCell(r,1).font = {name:'Calibri', size:10.5, bold:true, color:{argb:XLS_INK_DIM}};
+      ov.getCell(r,2).value = row[1];
+      ov.getCell(r,2).font = {name:'Calibri', size:10.5, color:{argb:XLS_INK}};
+      r++;
+    });
+
+    r += 1;
+    ov.mergeCells(r,1,r,4);
+    var mh = ov.getCell(r,1);
+    mh.value = 'Module consistency';
+    mh.font = {name:'Calibri', size:12, bold:true, color:{argb:'FF2C2158'}};
+    mh.fill = {type:'pattern', pattern:'solid', fgColor:{argb:XLS_TINT}};
+    ov.getRow(r).height = 20;
+    r += 1;
+    var tallyHeaderRow = r;
+    ['Module','Phase','Sessions logged'].forEach(function(h,i){
+      var c = ov.getCell(r,i+1);
+      c.value = h;
+      c.font = {name:'Calibri', size:10.5, bold:true, color:{argb:'FFFFFFFF'}};
+      c.fill = {type:'pattern', pattern:'solid', fgColor:{argb:XLS_VIOLET}};
+      c.border = {bottom:{style:'thin', color:{argb:XLS_VIOLET_D}}};
+    });
+    ov.getRow(r).height = 20;
+    r += 1;
+    var tallyStart = r;
+    MODULES.forEach(function(m, idx){
+      var count = state.moduleLog.filter(function(e){ return e.module===m.id; }).length;
+      ov.getCell(r,1).value = m.name;
+      ov.getCell(r,2).value = PHASE_LABEL[m.phase];
+      ov.getCell(r,3).value = count;
+      for(var c=1;c<=3;c++){
+        ov.getCell(r,c).font = {name:'Calibri', size:10.5, color:{argb:XLS_INK}};
+        ov.getCell(r,c).border = {bottom:{style:'hair', color:{argb:XLS_BORDER}}};
+        if(idx % 2 === 1) ov.getCell(r,c).fill = {type:'pattern', pattern:'solid', fgColor:{argb:XLS_ZEBRA}};
+      }
+      r++;
+    });
+    ov.getCell(r,1).value = 'Regulation Bridge';
+    ov.getCell(r,2).value = 'Core tool';
+    ov.getCell(r,3).value = state.regBridge.length;
+    for(var c=1;c<=3;c++){
+      ov.getCell(r,c).font = {name:'Calibri', size:10.5, bold:true, color:{argb:XLS_INK}};
+      ov.getCell(r,c).border = {bottom:{style:'hair', color:{argb:XLS_BORDER}}};
+    }
+    r += 2;
+
+    ov.mergeCells(r,1,r,4);
+    var ph = ov.getCell(r,1);
+    ph.value = '12-week plan';
+    ph.font = {name:'Calibri', size:12, bold:true, color:{argb:'FF2C2158'}};
+    ph.fill = {type:'pattern', pattern:'solid', fgColor:{argb:XLS_TINT}};
+    ov.getRow(r).height = 20;
+    r += 1;
+    ['Week','Phase','Focus'].forEach(function(h,i){
+      var c = ov.getCell(r,i+1);
+      c.value = h;
+      c.font = {name:'Calibri', size:10.5, bold:true, color:{argb:'FFFFFFFF'}};
+      c.fill = {type:'pattern', pattern:'solid', fgColor:{argb:XLS_VIOLET}};
+      c.border = {bottom:{style:'thin', color:{argb:XLS_VIOLET_D}}};
+    });
+    ov.getRow(r).height = 20;
+    r += 1;
+    WEEKS.forEach(function(w, idx){
+      ov.getCell(r,1).value = 'Week '+w.n;
+      ov.getCell(r,2).value = PHASE_LABEL[w.phase];
+      ov.getCell(r,3).value = w.focus;
+      for(var c=1;c<=3;c++){
+        ov.getCell(r,c).font = {name:'Calibri', size:10.5, color:{argb:XLS_INK}};
+        ov.getCell(r,c).alignment = {wrapText:true, vertical:'top'};
+        ov.getCell(r,c).border = {bottom:{style:'hair', color:{argb:XLS_BORDER}}};
+        if(idx % 2 === 1) ov.getCell(r,c).fill = {type:'pattern', pattern:'solid', fgColor:{argb:XLS_ZEBRA}};
+      }
+      r++;
+    });
+    ov.getColumn(1).width = 22; ov.getColumn(2).width = 16;
+    ov.getColumn(3).width = 46; ov.getColumn(4).width = 18;
+    ov.views = [{state:'frozen', ySplit:3, showGridLines:false}];
+
+    /* --- Regulation Bridge --- */
+    dataSheet(wb, 'Regulation Bridge', 'FACE YOUR POWER — Regulation Bridge Log',
+      'Core tool — practiced throughout all 12 weeks. Every entry counts, even the short version.',
+      ['Date','How it went'],
+      [{width:16,type:'date'},{width:65,type:'wrap'}],
+      state.regBridge.map(function(e){ return [e.date||'', e.note||'']; })
+    );
+
+    /* --- Module Log --- */
+    dataSheet(wb, 'Module Log', 'FACE YOUR POWER — Module Log',
+      'SEE × FREE × GO across Prepare, Perform and Pursue.',
+      ['Date','Module','Reps','One thing to remember'],
+      [{width:16,type:'date'},{width:20},{width:8},{width:55,type:'wrap'}],
+      state.moduleLog.map(function(e){ return [e.date||'', moduleName(e.module), e.reps||'', e.note||'']; })
+    );
+
+    /* --- Reflection --- */
+    dataSheet(wb, 'Reflection', 'FACE YOUR POWER — My Reflection',
+      'What I want to remember from each module.',
+      ['Module','What I want to remember'],
+      [{width:20},{width:75,type:'wrap'}],
+      MODULES.map(function(m){ return [m.name, state.reflections[m.id]||'']; })
+    );
+
+    /* --- Live Practice --- */
+    var liveHeaders = ['Date'];
+    var liveFieldIds = [];
+    LIVE_SECTIONS.forEach(function(sec){
+      var prefix = sec.title.replace(/^\d+\.\s*/, '');
+      sec.fields.forEach(function(f){
+        if(f.id === 'date') return;
+        liveFieldIds.push(f.id);
+        liveHeaders.push(prefix + ': ' + f.label);
+      });
+    });
+    var liveColDefs = [{width:16,type:'date'}].concat(liveFieldIds.map(function(){ return {width:30,type:'wrap'}; }));
+    dataSheet(wb, 'Live Practice', 'FACE YOUR POWER — Live Practice Tracker',
+      'SEE what is happening. FREE what gets in the way. GO with what you need.',
+      liveHeaders, liveColDefs,
+      state.livePractice.map(function(e){ return [e.date||''].concat(liveFieldIds.map(function(id){ return e[id]||''; })); }),
+      {freezeCol:true}
+    );
+
+    /* --- Moment Log --- */
+    dataSheet(wb, 'Moment Log', 'FACE YOUR POWER — Moment Log',
+      'Notice it → capture it → keep training.',
+      ['Date','Stage','Situation / trigger','Emotion','Thought','Body','Reaction','Performance','Pattern / belief','Exercise','Desired response'],
+      [{width:16,type:'date'},{width:12},{width:34,type:'wrap'},{width:20,type:'wrap'},{width:26,type:'wrap'},{width:22,type:'wrap'},{width:22,type:'wrap'},{width:24,type:'wrap'},{width:26,type:'wrap'},{width:24,type:'wrap'},{width:30,type:'wrap'}],
+      state.momentLog.map(function(e){
+        return [e.date||'', e.stage||'', e.situation||'', e.emotion||'', e.thought||'', e.body||'', e.reaction||'', e.performance||'', e.pattern||'', e.exercise||'', e.response||''];
+      }),
+      {freezeCol:true}
+    );
+
+    return wb.xlsx.writeBuffer().then(function(buffer){
+      var blob = new Blob([buffer], {type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url; a.download = 'face-your-power-tracker-export.xlsx';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+  }
+
+  /* ---------------- Init ---------------- */
+  function renderAll(){
+    renderOverview();
+    renderRegBridge();
+    renderModuleLog();
+    renderReflection();
+    renderLiveList();
+    renderMomentLog();
+  }
+  renderLiveAccordion();
+  renderAll();
+
+  if(!state.startDate){
+    setTimeout(function(){
+      document.getElementById('startDateInput').value = todayStr();
+      modalBg.classList.add('open');
+    }, 400);
+  }
+})();
+</script>
+</body>
+</html>
