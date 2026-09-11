@@ -27,6 +27,10 @@
     --phase-prepare:#8C6CEA;
     --phase-perform:#6C4FC7;
     --phase-pursue:#432E86;
+    --field-bg:#FFFFFF;
+    --field-text:#20223A;
+    --field-border:#D9D4EC;
+    --field-placeholder:#8B8FB0;
     --radius:16px;
     --radius-sm:10px;
     --shadow:0 20px 60px -20px rgba(0,0,0,.6);
@@ -108,12 +112,14 @@
 
   label{display:block;font-size:12.5px;color:var(--ink-dim);margin:0 0 6px;font-weight:500;}
   input[type=text],input[type=date],textarea,select{
-    width:100%;background:var(--panel-alt);border:1px solid var(--border);
-    color:var(--ink);border-radius:var(--radius-sm);padding:11px 12px;
-    font-family:inherit;font-size:14.5px;margin-bottom:14px;transition:border-color .15s;
+    width:100%;background:var(--field-bg);border:1px solid var(--field-border);
+    color:var(--field-text);border-radius:var(--radius-sm);padding:11px 12px;
+    font-family:inherit;font-size:14.5px;margin-bottom:14px;transition:border-color .15s, box-shadow .15s;
   }
-  input:focus,textarea:focus,select:focus{outline:none;border-color:var(--violet);}
+  input::placeholder,textarea::placeholder{color:var(--field-placeholder);}
+  input:focus,textarea:focus,select:focus{outline:none;border-color:var(--violet);box-shadow:0 0 0 3px rgba(140,108,234,.18);}
   textarea{resize:vertical;min-height:64px;}
+  select{color-scheme:light;}
   .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
   @media(max-width:520px){.field-row{grid-template-columns:1fr;}}
 
@@ -141,9 +147,14 @@
   .entry-date{font-size:12px;color:var(--violet-light);font-weight:600;}
   .entry-tag{font-size:11px;color:var(--ink-faint);}
   .entry-body{font-size:14px;color:var(--ink);white-space:pre-wrap;}
-  .entry-del{background:none;border:none;color:var(--ink-faint);cursor:pointer;font-size:12px;padding:2px 4px;}
+  .entry-actions{display:flex;gap:12px;}
+  .entry-del,.entry-edit{background:none;border:none;color:var(--ink-faint);cursor:pointer;font-size:12px;padding:2px 4px;}
   .entry-del:hover{color:#D98BA6;}
+  .entry-edit:hover{color:var(--violet-light);}
   .empty-state{color:var(--ink-faint);font-size:13.5px;padding:18px 4px;text-align:center;}
+  .edit-form{margin-top:8px;}
+  .edit-form label{margin-top:2px;}
+  .edit-actions{display:flex;gap:10px;margin-top:2px;}
 
   /* ---------- Overview hero ---------- */
   .hero{
@@ -260,7 +271,6 @@
     <button class="tab-btn active" data-view="overview">Overview</button>
     <button class="tab-btn" data-view="regbridge">Regulation Bridge</button>
     <button class="tab-btn" data-view="modulelog">Module Log</button>
-    <button class="tab-btn" data-view="reflection">Reflection</button>
     <button class="tab-btn" data-view="livepractice">Live Practice</button>
     <button class="tab-btn" data-view="momentlog">Moment Log</button>
   </nav>
@@ -271,8 +281,8 @@
     <section id="overview" class="view active">
       <div class="hero">
         <div class="hero-kicker">SEE. FREE. GO.</div>
-        <h2>Mental strength isn't a crisis plan. It's a muscle — trained daily, on purpose.</h2>
-        <p class="sub">This is your 12-week training arc through PREPARE, PERFORM and PURSUE. Log every practice — even the short version counts. The count is the point.</p>
+        <h2>Face Your Power is a mental-performance method for elite athletes. It is a training system — the same discipline you already bring to your physical training, now applied to your mind.</h2>
+        <p class="sub">This is your 12-week training arc through PREPARE, PERFORM and PURSUE. Log every practice — even the short version counts.</p>
 
         <div class="arc-wrap">
           <div class="arc" id="arc"></div>
@@ -295,7 +305,7 @@
       <div class="card">
         <div class="eyebrow">CORE TOOL — PRACTICED THROUGHOUT ALL 12 WEEKS</div>
         <h3>Regulation Bridge Log</h3>
-        <p class="muted">Log it every time you practice the Regulation Bridge — the short version counts just as much as the long one.</p>
+        <p class="muted">It's the one physical skill that everything around it depends on. Log it here every time you practice it.</p>
         <form id="formRegBridge" style="margin-top:18px;">
           <div class="field-row">
             <div><label for="rbDate">Date</label><input type="date" id="rbDate" required></div>
@@ -310,12 +320,12 @@
       </div>
     </section>
 
-    <!-- ========== MODULE LOG ========== -->
+    <!-- ========== MODULE LOG & REFLECTION ========== -->
     <section id="modulelog" class="view">
       <div class="card">
         <div class="eyebrow">SEE × FREE × GO — ACROSS PREPARE, PERFORM, PURSUE</div>
-        <h3>Module Log</h3>
-        <p class="muted">Add a row every time you practice an exercise within a module.</p>
+        <h3>Module Log & Reflection</h3>
+        <p class="muted">When you practice an exercise within a FYP module, log here when and how often you do it. Reflect on what you would like to remember and what you are taking with you from this module.</p>
         <form id="formModuleLog" style="margin-top:18px;">
           <div class="field-row">
             <div><label for="mlDate">Date</label><input type="date" id="mlDate" required></div>
@@ -323,25 +333,13 @@
               <select id="mlModule" required></select>
             </div>
           </div>
-          <div class="field-row">
-            <div><label for="mlReps">Reps</label><input type="text" id="mlReps" placeholder="1" inputmode="numeric"></div>
-            <div><label for="mlNote">One thing to remember</label><input type="text" id="mlNote" placeholder="What landed this time?"></div>
-          </div>
+          <label for="mlReps">Reps</label><input type="text" id="mlReps" placeholder="1" inputmode="numeric">
           <button class="btn" type="submit">Log this rep</button>
         </form>
       </div>
       <div class="card">
         <h3>Your log</h3>
         <div class="entry-list" id="mlList"></div>
-      </div>
-    </section>
-
-    <!-- ========== REFLECTION ========== -->
-    <section id="reflection" class="view">
-      <div class="card">
-        <div class="eyebrow">MY REFLECTION</div>
-        <h3>What I want to remember</h3>
-        <p class="muted">One line per module is enough. Come back and update it any time — this is a living page, not a test.</p>
       </div>
       <div id="reflList"></div>
     </section>
@@ -351,7 +349,7 @@
       <div class="card">
         <div class="eyebrow">SEE WHAT IS HAPPENING. FREE WHAT GETS IN THE WAY. GO WITH WHAT YOU NEED.</div>
         <h3>Live Practice Tracker</h3>
-        <p class="muted">Before you can change something, you first have to see it clearly. You don't have to solve it immediately — first, notice it. A few honest words are enough.</p>
+        <p class="muted">This is to track your mental state live during training or between competitions. Before you can change something, you first have to see it clearly. You don't have to solve it immediately — first, notice it. A few honest words are enough.</p>
       </div>
 
       <form id="formLive">
@@ -463,7 +461,7 @@
   var LIVE_SECTIONS = [
     {id:'today', title:'1. Today', sub:'Set the scene', fields:[
       {id:'date', label:'Date', type:'date', ph:''},
-      {id:'type', label:'Type of training', type:'text', ph:'e.g. on-ice, gym, match day, travel'},
+      {id:'type', label:'Type of training / competition', type:'text', ph:'e.g. on-ice, gym, match day, competition, travel'},
       {id:'where', label:'Where am I?', type:'text', ph:'Camp, home base, competition site…'}
     ]},
     {id:'checkin', title:'2. Quick check-in', sub:'Be specific — "bad" or "stressed" is a start, not the answer', fields:[
@@ -634,7 +632,7 @@
       document.getElementById('mlModule').value = w.moduleId;
     });
     var jr = document.getElementById('jumpReflect');
-    if(jr) jr.addEventListener('click', function(){ showView('reflection'); });
+    if(jr) jr.addEventListener('click', function(){ showView('modulelog'); });
   }
 
   function renderStats(){
@@ -661,6 +659,110 @@
     el.innerHTML = html;
   }
 
+  /* ---------------- Shared: field schemas for saved-entry editing ---------------- */
+  var editing = null; // {bucket, id} of the entry currently being edited, or null
+
+  var REGBRIDGE_FIELDS = [
+    {id:'date', label:'Date', type:'date'},
+    {id:'note', label:'How it went', type:'text'}
+  ];
+  var MODULELOG_FIELDS = [
+    {id:'date', label:'Date', type:'date'},
+    {id:'module', label:'Module', type:'select', options:MODULES},
+    {id:'reps', label:'Reps', type:'text'}
+  ];
+  var MOMENTLOG_FIELDS = [
+    {id:'date', label:'Date', type:'date'},
+    {id:'stage', label:'Stage', type:'select', options:['Prepare','Perform','Pursue']},
+    {id:'situation', label:'Situation / trigger', type:'textarea'},
+    {id:'emotion', label:'Emotion', type:'text'},
+    {id:'thought', label:'Thought', type:'text'},
+    {id:'body', label:'Body', type:'text'},
+    {id:'reaction', label:'Reaction', type:'text'},
+    {id:'performance', label:'Performance impact', type:'text'},
+    {id:'pattern', label:'Pattern / belief', type:'text'},
+    {id:'exercise', label:'Exercise', type:'text'},
+    {id:'response', label:'Desired response', type:'text'}
+  ];
+  var LIVE_FLAT_FIELDS = [];
+  LIVE_SECTIONS.forEach(function(sec){
+    var prefix = sec.title.replace(/^\d+\.\s*/, '');
+    sec.fields.forEach(function(f){
+      LIVE_FLAT_FIELDS.push({id:f.id, label: f.id==='date' ? f.label : (prefix+': '+f.label), type:f.type});
+    });
+  });
+
+  function fieldControlHtml(prefix, f, value){
+    value = value==null ? '' : value;
+    var elId = prefix+'-'+f.id;
+    if(f.type==='textarea'){
+      return '<label for="'+elId+'">'+f.label+'</label><textarea id="'+elId+'" data-key="'+f.id+'">'+esc(value)+'</textarea>';
+    }
+    if(f.type==='select'){
+      var opts = f.options.map(function(o){
+        var val = (typeof o==='string') ? o : o.id;
+        var lbl = (typeof o==='string') ? o : o.name;
+        return '<option value="'+val+'"'+(val===value?' selected':'')+'>'+lbl+'</option>';
+      }).join('');
+      return '<label for="'+elId+'">'+f.label+'</label><select id="'+elId+'" data-key="'+f.id+'">'+opts+'</select>';
+    }
+    var type = f.type==='date' ? 'date' : 'text';
+    return '<label for="'+elId+'">'+f.label+'</label><input type="'+type+'" id="'+elId+'" data-key="'+f.id+'" value="'+esc(value)+'">';
+  }
+  function buildEditForm(bucket, entry, schema){
+    var html = schema.map(function(f){ return fieldControlHtml('edit-'+bucket+'-'+entry.id, f, entry[f.id]); }).join('');
+    return '<div class="edit-form" data-bucket="'+bucket+'" data-id="'+entry.id+'">'+html+
+      '<div class="edit-actions"><button type="button" class="btn small save-edit">Save</button><button type="button" class="btn ghost small cancel-edit">Cancel</button></div></div>';
+  }
+  function actionBtns(bucket,id){
+    return '<span class="entry-actions"><button type="button" class="entry-edit" data-bucket="'+bucket+'" data-id="'+id+'">edit</button><button type="button" class="entry-del" data-bucket="'+bucket+'" data-id="'+id+'">remove</button></span>';
+  }
+  function rerenderBucket(bucket){
+    if(bucket==='regBridge') renderRegBridge();
+    else if(bucket==='moduleLog') renderModuleLog();
+    else if(bucket==='livePractice') renderLiveList();
+    else if(bucket==='momentLog') renderMomentLog();
+  }
+  function wireEntryActions(container, bucket){
+    container.querySelectorAll('.entry-edit').forEach(function(btn){
+      btn.onclick = function(){ editing = {bucket:bucket, id:btn.getAttribute('data-id')}; rerenderBucket(bucket); };
+    });
+    container.querySelectorAll('.entry-del').forEach(function(btn){
+      btn.onclick = function(){
+        var id = btn.getAttribute('data-id');
+        state[bucket] = state[bucket].filter(function(e){ return e.id !== id; });
+        if(editing && editing.bucket===bucket && editing.id===id) editing = null;
+        saveState();
+        rerenderBucket(bucket); renderOverview();
+      };
+    });
+    container.querySelectorAll('.save-edit').forEach(function(btn){
+      btn.onclick = function(){
+        var form = btn.closest('.edit-form');
+        var id = form.getAttribute('data-id');
+        var entry = state[bucket].filter(function(e){ return e.id===id; })[0];
+        if(entry){
+          form.querySelectorAll('[data-key]').forEach(function(input){
+            entry[input.getAttribute('data-key')] = input.value.trim();
+          });
+          saveState();
+        }
+        editing = null;
+        rerenderBucket(bucket); renderOverview();
+      };
+    });
+    container.querySelectorAll('.cancel-edit').forEach(function(btn){
+      btn.onclick = function(){ editing = null; rerenderBucket(bucket); };
+    });
+  }
+  function isEditing(bucket,id){ return !!(editing && editing.bucket===bucket && editing.id===id); }
+  function esc(s){
+    if(!s) return '';
+    return String(s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
   /* ---------------- Regulation Bridge ---------------- */
   var formRB = document.getElementById('formRegBridge');
   document.getElementById('rbDate').value = todayStr();
@@ -676,10 +778,11 @@
     var list = document.getElementById('rbList');
     if(!state.regBridge.length){ list.innerHTML = '<div class="empty-state">No entries yet. Log your first Regulation Bridge practice above.</div>'; return; }
     list.innerHTML = state.regBridge.map(function(e){
-      return '<div class="entry"><div class="entry-top"><span class="entry-date">'+fmtDate(e.date)+'</span>'+delBtn('regBridge', e.id)+'</div>' +
+      if(isEditing('regBridge', e.id)) return '<div class="entry">'+buildEditForm('regBridge', e, REGBRIDGE_FIELDS)+'</div>';
+      return '<div class="entry"><div class="entry-top"><span class="entry-date">'+fmtDate(e.date)+'</span>'+actionBtns('regBridge', e.id)+'</div>' +
         (e.note?'<div class="entry-body">'+esc(e.note)+'</div>':'') + '</div>';
     }).join('');
-    wireDeletes();
+    wireEntryActions(list, 'regBridge');
   }
 
   /* ---------------- Module Log ---------------- */
@@ -692,12 +795,10 @@
       id:uid(),
       date:document.getElementById('mlDate').value,
       module:document.getElementById('mlModule').value,
-      reps:document.getElementById('mlReps').value.trim() || '1',
-      note:document.getElementById('mlNote').value.trim()
+      reps:document.getElementById('mlReps').value.trim() || '1'
     });
     saveState();
     document.getElementById('mlReps').value='';
-    document.getElementById('mlNote').value='';
     document.getElementById('mlDate').value = todayStr();
     renderModuleLog(); renderOverview();
   });
@@ -706,20 +807,19 @@
     var list = document.getElementById('mlList');
     if(!state.moduleLog.length){ list.innerHTML = '<div class="empty-state">No entries yet. Log your first rep above.</div>'; return; }
     list.innerHTML = state.moduleLog.map(function(e){
-      return '<div class="entry"><div class="entry-top"><span class="entry-date">'+fmtDate(e.date)+'</span><span class="entry-tag">'+moduleName(e.module)+' · '+esc(e.reps)+' rep(s)</span>'+delBtn('moduleLog', e.id)+'</div>' +
-        (e.note?'<div class="entry-body">'+esc(e.note)+'</div>':'') + '</div>';
+      if(isEditing('moduleLog', e.id)) return '<div class="entry">'+buildEditForm('moduleLog', e, MODULELOG_FIELDS)+'</div>';
+      return '<div class="entry"><div class="entry-top"><span class="entry-date">'+fmtDate(e.date)+'</span><span class="entry-tag">'+moduleName(e.module)+' · '+esc(e.reps)+' rep(s)</span>'+actionBtns('moduleLog', e.id)+'</div></div>';
     }).join('');
-    wireDeletes();
+    wireEntryActions(list, 'moduleLog');
   }
 
-  /* ---------------- Reflection ---------------- */
+  /* ---------------- Reflection (part of the Module Log & Reflection tab) ---------------- */
   function renderReflection(){
     var el = document.getElementById('reflList');
     el.innerHTML = MODULES.map(function(m){
       var val = state.reflections[m.id] || '';
       return '<div class="card refl-card">' +
         '<div class="refl-head"><h3>'+m.name+'</h3><span class="badge" style="background:'+PHASE_COLOR[m.phase]+'">'+PHASE_LABEL[m.phase]+'</span></div>' +
-        '<p class="muted" style="margin-bottom:10px;">What are you taking with you from this module?</p>' +
         '<textarea data-mod="'+m.id+'" placeholder="A line, a shift, a phrase that stuck…">'+esc(val)+'</textarea>' +
         '</div>';
     }).join('');
@@ -777,18 +877,18 @@
     var list = document.getElementById('liveList');
     if(!state.livePractice.length){ list.innerHTML = '<div class="empty-state">No sessions saved yet.</div>'; return; }
     list.innerHTML = state.livePractice.map(function(e){
+      if(isEditing('livePractice', e.id)) return '<div class="entry">'+buildEditForm('livePractice', e, LIVE_FLAT_FIELDS)+'</div>';
       var summary = e.remember || e.pattern || e.situation || 'Session logged';
-      return '<div class="entry"><div class="entry-top"><span class="entry-date">'+fmtDate(e.date)+'</span>'+delBtn('livePractice', e.id)+'</div>' +
+      return '<div class="entry"><div class="entry-top"><span class="entry-date">'+fmtDate(e.date)+'</span>'+actionBtns('livePractice', e.id)+'</div>' +
         '<div class="entry-body">'+esc(summary)+'</div></div>';
     }).join('');
-    wireDeletes();
+    wireEntryActions(list, 'livePractice');
   }
 
   /* ---------------- Moment Log ---------------- */
   document.getElementById('mmDate').value = todayStr();
   document.getElementById('formMoment').addEventListener('submit', function(e){
     e.preventDefault();
-    var ids = ['Date','Stage','Situation','Emotion','Thought','Body','Reaction','Performance','Pattern','Exercise','Response'];
     var entry = {
       id:uid(),
       date:document.getElementById('mmDate').value,
@@ -815,35 +915,17 @@
     var list = document.getElementById('mmList');
     if(!state.momentLog.length){ list.innerHTML = '<div class="empty-state">No moments captured yet.</div>'; return; }
     list.innerHTML = state.momentLog.map(function(e){
-      return '<div class="mlog-entry"><div class="entry-top"><span class="entry-date">'+fmtDate(e.date)+'</span><span class="entry-tag">'+esc(e.stage)+'</span>'+delBtn('momentLog', e.id)+'</div>' +
+      if(isEditing('momentLog', e.id)) return '<div class="mlog-entry">'+buildEditForm('momentLog', e, MOMENTLOG_FIELDS)+'</div>';
+      return '<div class="mlog-entry"><div class="entry-top"><span class="entry-date">'+fmtDate(e.date)+'</span><span class="entry-tag">'+esc(e.stage)+'</span>'+actionBtns('momentLog', e.id)+'</div>' +
         (e.situation?'<div class="entry-body">'+esc(e.situation)+'</div>':'') +
         '<div class="mlog-grid">' +
           field('Emotion', e.emotion) + field('Thought', e.thought) + field('Body', e.body) + field('Reaction', e.reaction) +
           field('Performance', e.performance) + field('Pattern / belief', e.pattern) + field('Exercise', e.exercise) + field('Desired response', e.response) +
         '</div></div>';
     }).join('');
-    wireDeletes();
+    wireEntryActions(list, 'momentLog');
   }
   function field(label,val){ if(!val) return ''; return '<div><span>'+label+'</span>'+esc(val)+'</div>'; }
-
-  /* ---------------- Shared: delete + escape ---------------- */
-  function delBtn(bucket,id){ return '<button class="entry-del" data-bucket="'+bucket+'" data-id="'+id+'">remove</button>'; }
-  function wireDeletes(){
-    document.querySelectorAll('.entry-del').forEach(function(btn){
-      btn.onclick = function(){
-        var bucket = btn.getAttribute('data-bucket'), id = btn.getAttribute('data-id');
-        state[bucket] = state[bucket].filter(function(e){ return e.id !== id; });
-        saveState();
-        renderAll();
-      };
-    });
-  }
-  function esc(s){
-    if(!s) return '';
-    return String(s).replace(/[&<>"']/g, function(c){
-      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
-    });
-  }
 
   /* ---------------- Settings modal ---------------- */
   var modalBg = document.getElementById('modalBg');
@@ -1100,9 +1182,9 @@
     /* --- Module Log --- */
     dataSheet(wb, 'Module Log', 'FACE YOUR POWER — Module Log',
       'SEE × FREE × GO across Prepare, Perform and Pursue.',
-      ['Date','Module','Reps','One thing to remember'],
-      [{width:16,type:'date'},{width:20},{width:8},{width:55,type:'wrap'}],
-      state.moduleLog.map(function(e){ return [e.date||'', moduleName(e.module), e.reps||'', e.note||'']; })
+      ['Date','Module','Reps'],
+      [{width:16,type:'date'},{width:22},{width:10}],
+      state.moduleLog.map(function(e){ return [e.date||'', moduleName(e.module), e.reps||'']; })
     );
 
     /* --- Reflection --- */
