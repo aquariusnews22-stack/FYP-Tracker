@@ -269,8 +269,8 @@
 
   <nav class="tabs" id="tabs">
     <button class="tab-btn active" data-view="overview">Overview</button>
-    <button class="tab-btn" data-view="regbridge">Regulation Bridge</button>
     <button class="tab-btn" data-view="modulelog">Module Log</button>
+    <button class="tab-btn" data-view="regbridge">Regulation Bridge</button>
     <button class="tab-btn" data-view="livepractice">Live Practice</button>
     <button class="tab-btn" data-view="momentlog">Moment Log</button>
   </nav>
@@ -300,26 +300,6 @@
       </div>
     </section>
 
-    <!-- ========== REGULATION BRIDGE ========== -->
-    <section id="regbridge" class="view">
-      <div class="card">
-        <div class="eyebrow">CORE TOOL — PRACTICED THROUGHOUT ALL 12 WEEKS</div>
-        <h3>Regulation Bridge Log</h3>
-        <p class="muted">It's the one physical skill that everything around it depends on. Log it here every time you practice it.</p>
-        <form id="formRegBridge" style="margin-top:18px;">
-          <div class="field-row">
-            <div><label for="rbDate">Date</label><input type="date" id="rbDate" required></div>
-            <div><label for="rbNote">How it went (one word is enough)</label><input type="text" id="rbNote" placeholder="e.g. calm, easy, hard to focus"></div>
-          </div>
-          <button class="btn" type="submit">Log this practice</button>
-        </form>
-      </div>
-      <div class="card">
-        <h3>Your log</h3>
-        <div class="entry-list" id="rbList"></div>
-      </div>
-    </section>
-
     <!-- ========== MODULE LOG & REFLECTION ========== -->
     <section id="modulelog" class="view">
       <div class="card">
@@ -342,6 +322,26 @@
         <div class="entry-list" id="mlList"></div>
       </div>
       <div id="reflList"></div>
+    </section>
+
+    <!-- ========== REGULATION BRIDGE ========== -->
+    <section id="regbridge" class="view">
+      <div class="card">
+        <div class="eyebrow">CORE TOOL — PRACTICED THROUGHOUT ALL 12 WEEKS</div>
+        <h3>Regulation Bridge Log</h3>
+        <p class="muted">It's the one physical skill that everything around it depends on. Log it here every time you practice it.</p>
+        <form id="formRegBridge" style="margin-top:18px;">
+          <div class="field-row">
+            <div><label for="rbDate">Date</label><input type="date" id="rbDate" required></div>
+            <div><label for="rbNote">How it went (one word is enough)</label><input type="text" id="rbNote" placeholder="e.g. calm, easy, hard to focus"></div>
+          </div>
+          <button class="btn" type="submit">Log this practice</button>
+        </form>
+      </div>
+      <div class="card">
+        <h3>Your log</h3>
+        <div class="entry-list" id="rbList"></div>
+      </div>
     </section>
 
     <!-- ========== LIVE PRACTICE ========== -->
