@@ -190,7 +190,8 @@
   .focus-panel .ftitle{font-size:13px;color:var(--ink-dim);}
   .focus-panel .fmod{font-size:16.5px;font-weight:600;margin-top:2px;}
 
-  .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px;}
+  .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px;}
+  @media(max-width:760px){.stat-grid{grid-template-columns:repeat(2,1fr);}}
   @media(max-width:560px){.stat-grid{grid-template-columns:repeat(2,1fr);}}
   .stat{background:var(--panel-solid);border:1px solid var(--border-soft);border-radius:var(--radius-sm);padding:16px;}
   .stat .num{font-size:26px;font-weight:700;color:var(--violet-light);}
@@ -206,7 +207,9 @@
   .acc{border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:10px;overflow:hidden;background:var(--panel-alt);}
   .acc-head{
     display:flex;justify-content:space-between;align-items:center;padding:14px 16px;cursor:pointer;user-select:none;
+    width:100%;border:0;background:transparent;color:inherit;text-align:left;font-family:inherit;
   }
+  .acc-head:focus-visible{outline:2px solid var(--violet-light);outline-offset:-3px;}
   .acc-head .t{font-size:14px;font-weight:600;}
   .acc-head .st{font-size:12px;color:var(--ink-faint);margin-top:2px;}
   .acc-head .chev{transition:transform .2s;color:var(--ink-faint);}
@@ -218,6 +221,43 @@
   .refl-card{margin-bottom:12px;}
   .refl-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
   .refl-head .badge{font-size:10.5px;padding:3px 9px;border-radius:999px;color:#fff;}
+  .cycle-map{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:18px;}
+  .cycle-step{position:relative;background:var(--panel-alt);border:1px solid var(--border);border-radius:12px;padding:12px 10px;text-align:center;}
+  .cycle-step:not(:last-child)::after{content:'→';position:absolute;right:-10px;top:50%;transform:translateY(-50%);color:var(--violet-light);z-index:2;font-weight:700;}
+  .cycle-step strong{display:block;font-size:12px;letter-spacing:.04em;}
+  .cycle-step span{display:block;color:var(--ink-faint);font-size:10.5px;margin-top:3px;}
+  .engine-band{margin-top:10px;padding:14px 16px;border-radius:12px;background:linear-gradient(135deg,rgba(140,108,234,.18),rgba(91,63,176,.08));border:1px solid var(--violet-soft);}
+  .engine-band .engine-title{font-size:13px;font-weight:700;color:var(--violet-light);letter-spacing:.04em;}
+  .engine-band p{font-size:12.5px;color:var(--ink-dim);margin-top:3px;}
+  .loop-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px;margin-top:14px;}
+  .loop-field label{color:var(--violet-light);font-weight:600;}
+  .loop-field textarea{min-height:82px;margin-bottom:0;}
+  .transition-card{border-color:var(--violet-soft);background:linear-gradient(160deg,#171B3A 0%,var(--panel-solid) 100%);}
+  .transition-arrow{font-size:12px;color:var(--violet-light);letter-spacing:.06em;font-weight:700;margin-bottom:5px;}
+  .principle{border-left:3px solid var(--violet);padding-left:13px;margin-top:16px;color:var(--ink-dim);font-size:13.5px;}
+  .choice-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;}
+  .completion{font-size:10.5px;color:var(--ink-dim);border:1px solid var(--border);border-radius:999px;padding:3px 8px;margin-left:auto;margin-right:12px;white-space:nowrap;}
+  .completion.done{color:#D9D0FF;border-color:var(--violet);background:rgba(140,108,234,.14);}
+  .engine-acc{background:var(--panel-solid);border-color:var(--border-soft);margin-bottom:12px;}
+  .engine-acc .acc-body{padding-top:2px;}
+  .quick-note{font-size:12px;color:var(--ink-faint);margin-top:8px;}
+  .step-guide{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:2px 0 16px;padding:12px;border-radius:10px;background:rgba(140,108,234,.08);border:1px solid var(--border);}
+  .step-guide div{font-size:11.5px;color:var(--ink-dim);}
+  .step-guide strong{display:block;color:var(--violet-light);font-size:10px;letter-spacing:.05em;margin-bottom:3px;}
+  .field-help{display:block;color:var(--ink-faint);font-size:11.5px;line-height:1.35;margin:-8px 0 12px;}
+  .deep-flow{display:flex;gap:7px;flex-wrap:wrap;margin-top:15px;}
+  .deep-flow span{font-size:11px;border:1px solid var(--border);background:var(--panel-alt);padding:6px 9px;border-radius:999px;color:var(--ink-dim);}
+  @media(max-width:620px){.step-guide{grid-template-columns:1fr;}}
+  @media(max-width:620px){.cycle-map{grid-template-columns:1fr 1fr;}.loop-grid{grid-template-columns:1fr;}.cycle-step:nth-child(2)::after{display:none;}}
+
+  /* ---------- Multi-select process cards ---------- */
+  .check-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0 16px;}
+  .check-option{display:flex;align-items:flex-start;gap:10px;background:var(--panel-alt);border:1px solid var(--border);border-radius:12px;padding:12px;cursor:pointer;margin:0;color:var(--ink);}
+  .check-option:hover{border-color:var(--violet-soft);}
+  .check-option input{margin:3px 0 0;accent-color:var(--violet);flex:none;}
+  .check-option strong{display:block;font-size:13px;color:var(--violet-light);}
+  .check-option span{display:block;font-size:11.5px;color:var(--ink-dim);font-weight:400;margin-top:2px;line-height:1.35;}
+  @media(max-width:520px){.check-grid{grid-template-columns:1fr;}}
 
   /* ---------- Table (Moment Log) ---------- */
   .mlog-entry{background:var(--panel-alt);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:10px;}
@@ -269,10 +309,11 @@
 
   <nav class="tabs" id="tabs">
     <button class="tab-btn active" data-view="overview">Overview</button>
-    <button class="tab-btn" data-view="modulelog">Module Log</button>
-    <button class="tab-btn" data-view="regbridge">Regulation Bridge</button>
-    <button class="tab-btn" data-view="livepractice">Live Practice</button>
-    <button class="tab-btn" data-view="momentlog">Moment Log</button>
+    <button class="tab-btn" data-view="modulelog">Practice & Learn</button>
+    <button class="tab-btn" data-view="regbridge">Regulation</button>
+    <button class="tab-btn" data-view="momentlog">Quick Moment</button>
+    <button class="tab-btn" data-view="communication">Communication</button>
+    <button class="tab-btn" data-view="livepractice">Deep Reflection</button>
   </nav>
 
   <main>
@@ -283,6 +324,17 @@
         <div class="hero-kicker">SEE. FREE. GO.</div>
         <h2>Face Your Power is a mental-performance method for elite athletes. It is a training system — the same discipline you already bring to your physical training, now applied to your mind.</h2>
         <p class="sub">This is your 12-week training arc through PREPARE, PERFORM and PURSUE. Log every practice — even the short version counts.</p>
+
+        <div class="cycle-map" aria-label="Performance Cycle">
+          <div class="cycle-step"><strong>AWARENESS</strong><span>Notice</span></div>
+          <div class="cycle-step"><strong>REGULATION</strong><span>Reset</span></div>
+          <div class="cycle-step"><strong>CHOICE</strong><span>Direct</span></div>
+          <div class="cycle-step"><strong>PERFORMANCE</strong><span>Act</span></div>
+        </div>
+        <div class="engine-band">
+          <div class="engine-title">THE FYP LEARNING ENGINE</div>
+          <p>EXPERIENCE → REFLECT → LEARN → ADAPT. Every completed performance becomes useful input for the next cycle.</p>
+        </div>
 
         <div class="arc-wrap">
           <div class="arc" id="arc"></div>
@@ -300,12 +352,12 @@
       </div>
     </section>
 
-    <!-- ========== MODULE LOG & REFLECTION ========== -->
+    <!-- ========== PRACTICE & LEARN ========== -->
     <section id="modulelog" class="view">
       <div class="card">
         <div class="eyebrow">SEE × FREE × GO — ACROSS PREPARE, PERFORM, PURSUE</div>
-        <h3>Module Log & Reflection</h3>
-        <p class="muted">When you practice an exercise within a FYP module, log here when and how often you do it. Reflect on what you would like to remember and what you are taking with you from this module.</p>
+        <h3>Practice & Learn</h3>
+        <p class="muted">Log every mental-training practice. Add the six-step Learning Engine only when the session gave you useful information or when you finish a module. One short phrase per question is enough.</p>
         <form id="formModuleLog" style="margin-top:18px;">
           <div class="field-row">
             <div><label for="mlDate">Date</label><input type="date" id="mlDate" required></div>
@@ -313,28 +365,44 @@
               <select id="mlModule" required></select>
             </div>
           </div>
-          <label for="mlReps">Reps</label><input type="text" id="mlReps" placeholder="1" inputmode="numeric">
-          <button class="btn" type="submit">Log this rep</button>
+          <label for="mlReps">Repetitions</label><input type="text" id="mlReps" placeholder="1" inputmode="numeric">
+          <label for="mlCoreTool">Which Core Tool did you use? <span style="color:var(--ink-faint);font-weight:400;">(optional)</span></label>
+          <select id="mlCoreTool"></select>
+
+          <div class="acc open" id="practiceLearningAcc">
+            <button type="button" class="acc-head" aria-expanded="true">
+              <div><div class="t">Learning Engine</div><div class="st">Optional for regular practice · recommended when a session matters or a module ends</div></div>
+              <span class="chev">▾</span>
+            </button>
+            <div class="acc-body">
+              <div class="loop-grid" id="practiceLearningFields"></div>
+            </div>
+          </div>
+
+          <button class="btn" type="submit">Save practice session</button>
         </form>
       </div>
       <div class="card">
-        <h3>Your log</h3>
+        <h3>Your practice sessions</h3>
+        <p class="muted">Every saved practice counts. The badge shows whether a Learning Engine reflection was added.</p>
         <div class="entry-list" id="mlList"></div>
       </div>
-      <div id="reflList"></div>
     </section>
 
     <!-- ========== REGULATION BRIDGE ========== -->
     <section id="regbridge" class="view">
       <div class="card">
-        <div class="eyebrow">CORE TOOL — PRACTICED THROUGHOUT ALL 12 WEEKS</div>
-        <h3>Regulation Bridge Log</h3>
-        <p class="muted">It's the one physical skill that everything around it depends on. Log it here every time you practice it.</p>
+        <div class="eyebrow">REGULATION TOOLBOX — PRACTISED THROUGHOUT ALL 12 WEEKS</div>
+        <h3>Regulation Practice</h3>
+        <p class="muted">Log each regulation tool separately and rate how useful it was today. Over time, this shows you which reset works best for which situation.</p>
         <form id="formRegBridge" style="margin-top:18px;">
           <div class="field-row">
             <div><label for="rbDate">Date</label><input type="date" id="rbDate" required></div>
-            <div><label for="rbNote">How it went (one word is enough)</label><input type="text" id="rbNote" placeholder="e.g. calm, easy, hard to focus"></div>
+            <div><label for="rbExercise">Regulation exercise</label><select id="rbExercise" required></select></div>
           </div>
+          <label for="rbRating">How useful was it today?</label>
+          <select id="rbRating" required><option value="">Choose a rating</option><option value="1">1 — No noticeable effect</option><option value="2">2 — Small effect</option><option value="3">3 — Somewhat useful</option><option value="4">4 — Clearly useful</option><option value="5">5 — Strong effect</option></select>
+          <label for="rbNote">What did you notice?</label><input type="text" id="rbNote" placeholder="One short observation is enough.">
           <button class="btn" type="submit">Log this practice</button>
         </form>
       </div>
@@ -342,19 +410,86 @@
         <h3>Your log</h3>
         <div class="entry-list" id="rbList"></div>
       </div>
+      <div class="card">
+        <h3>Your regulation toolbox</h3>
+        <p class="muted">Compare repetitions and average usefulness. More entries make the pattern more reliable.</p>
+        <div id="rbInsights" style="margin-top:10px;"></div>
+      </div>
+    </section>
+
+    <!-- ========== COMMUNICATION & LEARNING ========== -->
+    <section id="communication" class="view">
+      <div class="card">
+        <div class="eyebrow">SAFE · PACE · STOP · CANT</div>
+        <h3>Communication &amp; Learning Check</h3>
+        <p class="muted">Use this after a training block, workshop, competition or meaningful interaction. Select every process you noticed. If the sequence repeated, save another check for the next moment or round.</p>
+        <p class="principle"><strong>You can only change what you can see.</strong> Notice what moved learning forward, what was missing and what may have moved you or the group backwards.</p>
+
+        <form id="formCommunication" style="margin-top:18px;">
+          <div class="field-row">
+            <div><label for="clDate">Date</label><input type="date" id="clDate" required></div>
+            <div><label for="clContext">Context</label>
+              <select id="clContext" required>
+                <option>Training session</option><option>Training block</option><option>Competition</option><option>Workshop</option><option>Team meeting</option><option>Coach conversation</option><option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="field-row">
+            <div><label for="clMoment">Moment or round <span style="color:var(--ink-faint);font-weight:400;">(optional)</span></label><input type="text" id="clMoment" placeholder="e.g. Drill 2, feedback round, after the mistake"></div>
+            <div><label for="clSource">Where did it appear?</label>
+              <select id="clSource"><option value="">None selected</option><option>Self-talk</option><option>Coach communication</option><option>Teammate communication</option><option>Team environment</option><option>Several sources</option><option>Other</option></select>
+            </div>
+          </div>
+
+          <label>Which processes did I notice? <span style="color:var(--ink-faint);font-weight:400;">Select all that apply</span></label>
+          <div class="check-grid" id="clProcesses">
+            <label class="check-option"><input type="checkbox" name="clProcess" value="SAFE"><span><strong>SAFE</strong>See, Ask, Feel, Express</span></label>
+            <label class="check-option"><input type="checkbox" name="clProcess" value="PACE"><span><strong>PACE</strong>Playful, Accepting, Curious, Empathetic</span></label>
+            <label class="check-option"><input type="checkbox" name="clProcess" value="STOP"><span><strong>STOP</strong>Stop, Triangulate, Organize, Present</span></label>
+            <label class="check-option"><input type="checkbox" name="clProcess" value="CANT"><span><strong>CANT</strong>Condemn, Authoritarian, Negate, Threaten</span></label>
+          </div>
+
+          <label for="clEvent">What happened, or what was said or done?</label>
+          <textarea id="clEvent" placeholder="Capture the observable moment, words or behaviour without judging it."></textarea>
+          <label for="clMissing">What was missing?</label>
+          <textarea id="clMissing" placeholder="What process, support, information, boundary or perspective was missing?"></textarea>
+          <label for="clFeel">How did it make me feel?</label>
+          <textarea id="clFeel" placeholder="Name the emotion, body response, energy or level of safety you noticed."></textarea>
+          <label for="clEffect">What effect did it have on learning or performance?</label>
+          <textarea id="clEffect" placeholder="What changed in focus, confidence, openness, decisions, teamwork or execution?"></textarea>
+          <div class="field-row">
+            <div><label for="clNeed">What did I need?</label>
+              <select id="clNeed"><option value="">None selected</option><option>More safety</option><option>More support</option><option>More clarity</option><option>More space</option><option>More challenge</option><option>Less pressure</option><option>Different language</option><option>The balance was right</option></select>
+            </div>
+            <div><label for="clFit">How useful was the communication?</label>
+              <select id="clFit"><option value="">Not rated</option><option value="1">1 — Worked against me</option><option value="2">2 — Mostly unhelpful</option><option value="3">3 — Mixed or neutral</option><option value="4">4 — Helpful</option><option value="5">5 — Strongly supported performance</option></select>
+            </div>
+          </div>
+          <label for="clNext">What will we test or communicate next?</label>
+          <input type="text" id="clNext" placeholder="One specific phrase, boundary, question, process or communication change.">
+          <button class="btn" type="submit">Save communication check</button>
+        </form>
+      </div>
+      <div class="card">
+        <h3>Your communication checks</h3>
+        <p class="muted">Several entries on the same date can show how the process changed across one session or workshop.</p>
+        <div class="entry-list" id="clList"></div>
+      </div>
     </section>
 
     <!-- ========== LIVE PRACTICE ========== -->
     <section id="livepractice" class="view">
       <div class="card">
         <div class="eyebrow">SEE WHAT IS HAPPENING. FREE WHAT GETS IN THE WAY. GO WITH WHAT YOU NEED.</div>
-        <h3>Live Practice Tracker</h3>
-        <p class="muted">This is to track your mental state live during training or between competitions. Before you can change something, you first have to see it clearly. You don't have to solve it immediately — first, notice it. A few honest words are enough.</p>
+        <h3>Deep Reflection</h3>
+        <p class="muted">Use this after an important performance, a difficult moment or a recurring pattern—not after every session. Complete it when you are calm enough to be curious, ideally within 24 hours. Work from facts to pattern to next action.</p>
+        <div class="deep-flow"><span>1 Context</span><span>2 State</span><span>3 Key moment</span><span>4 SEE</span><span>5 FREE</span><span>6 GO</span></div>
+        <p class="principle"><strong>Why this order?</strong> First preserve what happened. Then understand what influenced it. Only after that decide what to release and what to train next.</p>
       </div>
 
       <form id="formLive">
         <div id="liveAccordion"></div>
-        <button class="btn" type="submit" style="margin-top:6px;">Save this session</button>
+        <button class="btn" type="submit" style="margin-top:6px;">Save deep reflection</button>
       </form>
 
       <div class="card" style="margin-top:22px;">
@@ -366,9 +501,9 @@
     <!-- ========== MOMENT LOG ========== -->
     <section id="momentlog" class="view">
       <div class="card">
-        <div class="eyebrow">MOMENT LOG</div>
-        <h3>Capture a moment</h3>
-        <p class="muted">30–60 seconds. Notice it → capture it → keep training.</p>
+        <div class="eyebrow">QUICK MOMENT</div>
+        <h3>Capture it and continue</h3>
+        <p class="muted">30–60 seconds during or shortly after training. Capture only what is useful now. Use Deep Reflection later if the pattern needs more attention.</p>
         <form id="formMoment" style="margin-top:18px;">
           <div class="field-row">
             <div><label for="mmDate">Date</label><input type="date" id="mmDate" required></div>
@@ -378,22 +513,12 @@
               </select>
             </div>
           </div>
-          <label for="mmSituation">Situation / trigger</label><textarea id="mmSituation" placeholder="What happened?"></textarea>
-          <div class="field-row">
-            <div><label for="mmEmotion">Emotion</label><input type="text" id="mmEmotion" placeholder="What did I feel?"></div>
-            <div><label for="mmThought">Thought</label><input type="text" id="mmThought" placeholder="What went through my mind?"></div>
-          </div>
-          <div class="field-row">
-            <div><label for="mmBody">Body</label><input type="text" id="mmBody" placeholder="What did I notice physically?"></div>
-            <div><label for="mmReaction">Reaction</label><input type="text" id="mmReaction" placeholder="What did I do next?"></div>
-          </div>
-          <label for="mmPerformance">Performance impact</label><input type="text" id="mmPerformance" placeholder="What changed in my performance?">
-          <label for="mmPattern">Pattern / belief</label><input type="text" id="mmPattern" placeholder="What belief keeps showing up?">
-          <div class="field-row">
-            <div><label for="mmExercise">Exercise</label><input type="text" id="mmExercise" placeholder="Which FYP exercise could help?"></div>
-            <div><label for="mmResponse">Desired response</label><input type="text" id="mmResponse" placeholder="How do I want to respond next time?"></div>
-          </div>
-          <button class="btn" type="submit">Save this moment</button>
+          <label for="mmSituation">1. What happened?</label><input type="text" id="mmSituation" placeholder="The specific moment or trigger.">
+          <label for="mmNotice">2. What did I notice in myself?</label><input type="text" id="mmNotice" placeholder="Emotion, thought, body sensation or energy.">
+          <label for="mmReaction">3. What did I do?</label><input type="text" id="mmReaction" placeholder="My immediate response.">
+          <label for="mmPerformance">4. What was the performance effect?</label><input type="text" id="mmPerformance" placeholder="Focus, confidence, energy, decision or technique.">
+          <label for="mmResponse">5. What do I need or choose next?</label><input type="text" id="mmResponse" placeholder="One useful response, cue or action.">
+          <button class="btn" type="submit">Save quick moment</button>
         </form>
       </div>
       <div class="card">
@@ -445,78 +570,82 @@
     {n:2,  phase:'prepare',    title:'Prepare',     focus:'SEE × Prepare',  moduleId:'see-prepare'},
     {n:3,  phase:'prepare',    title:'Prepare',     focus:'FREE × Prepare', moduleId:'free-prepare'},
     {n:4,  phase:'prepare',    title:'Prepare',     focus:'GO × Prepare',   moduleId:'go-prepare'},
-    {n:5,  phase:'foundation', title:'Integrate',   focus:'Review — what changed in your Prepare state?', moduleId:null},
+    {n:5,  phase:'foundation', title:'Integrate',   focus:'Practise and review your Prepare tools', moduleId:null},
     {n:6,  phase:'perform',    title:'Perform',     focus:'SEE × Perform',  moduleId:'see-perform'},
     {n:7,  phase:'perform',    title:'Perform',     focus:'FREE × Perform', moduleId:'free-perform'},
     {n:8,  phase:'perform',    title:'Perform',     focus:'GO × Perform',   moduleId:'go-perform'},
-    {n:9,  phase:'foundation', title:'Integrate',   focus:'Review — what changed under pressure?', moduleId:null},
+    {n:9,  phase:'foundation', title:'Integrate',   focus:'Practise and review your Perform tools', moduleId:null},
     {n:10, phase:'pursue',     title:'Pursue',      focus:'SEE × Pursue',   moduleId:'see-pursue'},
     {n:11, phase:'pursue',     title:'Pursue',      focus:'FREE × Pursue',  moduleId:'free-pursue'},
-    {n:12, phase:'pursue',     title:'Pursue',      focus:'GO × Pursue — and your 12-week reflection', moduleId:'go-pursue'}
+    {n:12, phase:'pursue',     title:'Pursue',      focus:'GO × Pursue — launch your next performance cycle', moduleId:'go-pursue'}
   ];
 
   var PHASE_COLOR = {foundation:'#5B6089', prepare:'#8C6CEA', perform:'#6C4FC7', pursue:'#432E86'};
   var PHASE_LABEL = {foundation:'Foundation', prepare:'Prepare', perform:'Perform', pursue:'Pursue'};
+  var REGULATION_TOOLS = ['Stress Reset','Fast Reset — Physiological Sigh','Orienting Reset','Tension → Release','Reset + Cue'];
+  var CORE_TOOLS = ['Ask Better Questions','Assumption Check','Decision Compass','Plan the Next Move'];
+
+  var ENGINE_STEPS = [
+    {id:'goal', stage:'EXPERIENCE', label:'1. GOALS', question:'What was I aiming for?', placeholder:'What did I want to achieve, experience or improve?'},
+    {id:'difficulties', stage:'REFLECT', label:'2. DIFFICULTIES', question:'What challenged me?', placeholder:'What got in the way, disrupted me or made the situation harder — without judging it?'},
+    {id:'solutions', stage:'LEARN', label:'3. SOLUTIONS', question:'What helped or could help?', placeholder:'What worked? What did I do well? What support, strategy or response could be useful?'},
+    {id:'surprises', stage:'REFLECT', label:'4. SURPRISES', question:'What did I discover?', placeholder:'What was unexpected, different or revealing — positive, difficult or neutral?'},
+    {id:'feel', stage:'REFLECT', label:'5. HOW DO I FEEL?', question:'What is happening in me now?', placeholder:'Name your emotions, body sensations and energy or activation level. What may need regulation before you move on?'},
+    {id:'next', stage:'ADAPT', label:'6. NEXT', question:'What do I want to try next?', placeholder:'Choose one specific action, cue, response or adjustment for the next attempt.'}
+  ];
 
   var LIVE_SECTIONS = [
-    {id:'today', title:'1. Today', sub:'Set the scene', fields:[
-      {id:'date', label:'Date', type:'date', ph:''},
-      {id:'type', label:'Type of training / competition', type:'text', ph:'e.g. on-ice, gym, match day, competition, travel'},
-      {id:'where', label:'Where am I?', type:'text', ph:'Camp, home base, competition site…'}
+    {id:'context', title:'1. DESCRIBE THE EXPERIENCE', sub:'First record the facts, before interpreting them',
+      when:'Complete immediately after the session or within 24 hours.',
+      why:'Context affects state and performance. Recording it first prevents vague memories such as “I was simply bad.”',
+      later:'You can compare whether certain environments, training types or competition conditions repeatedly influence you.', fields:[
+      {id:'date', label:'Date', type:'date', ph:'', help:'Places the experience accurately in your training timeline.'},
+      {id:'type', label:'Training or competition type', type:'text', ph:'e.g. technical training, match, final, travel day', help:'Lets you compare similar types of demand later.'},
+      {id:'where', label:'Where and under what conditions?', type:'text', ph:'Venue, weather, crowd, travel, recovery or other relevant context', help:'Captures external factors that may otherwise be forgotten.'}
     ]},
-    {id:'checkin', title:'2. Quick check-in', sub:'Be specific — "bad" or "stressed" is a start, not the answer', fields:[
-      {id:'emotion', label:'Emotion', type:'text', ph:'Which emotion(s) am I noticing?'},
-      {id:'trigger', label:'Trigger', type:'text', ph:'What happened just before I felt this way?'},
-      {id:'thought', label:'Thought', type:'text', ph:'What am I thinking right now?'},
-      {id:'body', label:'Body', type:'text', ph:'What do I notice in my body?'}
+    {id:'state-snapshot', title:'2. STATE SNAPSHOT — Reconnect with your inner state', sub:'Recall what was happening inside you before analysing why',
+      when:'Complete while the memory of the key moment is still clear.',
+      why:'Emotions, thoughts, body sensations and activation influence decisions. Capturing them before analysis keeps the reflection honest.',
+      later:'You can recognise your personal early-warning signs and the states connected with your strongest performances.', fields:[
+      {id:'emotion', label:'Emotion', type:'text', ph:'What emotion was present?', help:'Names the emotional signal instead of judging the whole performance.'},
+      {id:'thought', label:'Thought or inner dialogue', type:'text', ph:'What was I saying to myself?', help:'Makes automatic self-talk visible.'},
+      {id:'body', label:'Body sensation', type:'text', ph:'Where and how did I feel it physically?', help:'Helps identify physical cues that appear before performance changes.'},
+      {id:'activation', label:'Energy or activation', type:'text', ph:'Too low, useful, or too high? What did it feel like?', help:'Shows whether your activation level matched the task.'}
     ]},
-    {id:'capture', title:'3. Capture the moment', sub:'30–60 seconds. Notice it → capture it → keep training', fields:[
-      {id:'situation', label:'Situation / trigger', type:'textarea', ph:'What happened?'},
-      {id:'emotion2', label:'Emotion', type:'text', ph:'What did I feel?'},
-      {id:'thought2', label:'Thought', type:'text', ph:'What went through my mind?'},
-      {id:'body2', label:'Body', type:'text', ph:'What did I notice physically?'},
-      {id:'reaction', label:'Reaction', type:'text', ph:'What did I do next?'},
-      {id:'performance', label:'Performance', type:'text', ph:'What changed in my performance?'}
+    {id:'key-moment', title:'3. KEY MOMENT — Reconstruct one specific sequence', sub:'Choose one moment, not the whole session',
+      when:'Complete after the state snapshot. Focus on the moment with the greatest learning value.',
+      why:'A specific sequence can be trained. A global label such as “good” or “bad” cannot.',
+      later:'You can compare trigger → response → performance effect across multiple sessions.', fields:[
+      {id:'situation', label:'What exactly happened?', type:'textarea', ph:'Describe the observable moment as if watching a short video clip.', help:'Separates facts from interpretation.'},
+      {id:'reaction', label:'What did I do immediately afterwards?', type:'text', ph:'My decision, behaviour or technical response.', help:'Connects the event to your actual response.'},
+      {id:'performance', label:'What changed in my performance?', type:'text', ph:'Focus, confidence, timing, technique, energy or decision-making.', help:'Shows why this moment matters for performance.'}
     ]},
-    {id:'see', title:'4. SEE — what is happening?', sub:"You can't change what you haven't noticed yet", fields:[
-      {id:'pattern', label:'Pattern', type:'text', ph:'What am I noticing about this moment?'},
-      {id:'trigger2', label:'Trigger', type:'text', ph:'What tends to trigger this response?'},
-      {id:'automatic', label:'Automatic response', type:'text', ph:'What belief or thought appears automatically?'},
-      {id:'past', label:'Past connection', type:'text', ph:'Does this remind me of something before?'},
-      {id:'impact', label:'Impact', type:'text', ph:'Focus, energy, confidence, technique, performance?'}
+    {id:'see', title:'4. SEE — Identify the pattern', sub:'Move from one moment to what may be repeating',
+      when:'Complete only after describing the facts, state and response.',
+      why:'Analysing too early encourages assumptions. Now you have enough information to look for a pattern.',
+      later:'Repeated triggers, thoughts and reactions become visible instead of feeling random.', fields:[
+      {id:'trigger2', label:'What triggered the shift?', type:'text', ph:'What happened immediately before my state or performance changed?', help:'Identifies the cue that starts the sequence.'},
+      {id:'automatic', label:'What was my automatic response?', type:'text', ph:'A thought, belief, emotion, urge or behaviour.', help:'Shows what your autopilot currently does.'},
+      {id:'pattern', label:'Is this a recurring pattern?', type:'text', ph:'First time, occasional, or familiar? Where else does it appear?', help:'Distinguishes a one-off event from something worth training.'},
+      {id:'impact', label:'What is the cost—or benefit—of this pattern?', type:'text', ph:'How does it affect performance, recovery, confidence or relationships?', help:'Clarifies whether changing or strengthening the pattern matters.'}
     ]},
-    {id:'free', title:'5. FREE — what is getting in the way?', sub:'Once the pattern is visible, you can work with it', fields:[
-      {id:'blocker', label:'What gets in the way?', type:'text', ph:'A belief, emotion, reaction, trigger?'},
-      {id:'exercise', label:'Exercise', type:'text', ph:'Which FYP exercise could help?'},
-      {id:'reframe', label:'Choose again', type:'text', ph:'Not CTRL+C → CTRL+V. CTRL+Z: what could I respond to differently?'}
+    {id:'free', title:'5. FREE — Create space for another response', sub:'Separate what you can influence from what you do not need to carry',
+      when:'Complete after the pattern is clear and before choosing the next action.',
+      why:'You cannot make a useful new choice while still fighting an uncontrollable result, opponent, mistake or emotion.',
+      later:'You can see which regulation tools and reframes reliably help you recover and regain choice.', fields:[
+      {id:'control', label:'What is within my control now?', type:'text', ph:'My attention, breathing, preparation, communication, decision or action.', help:'Redirects energy toward something trainable.'},
+      {id:'release', label:'What do I not need to carry forward?', type:'text', ph:'A result, mistake, expectation, judgement or uncontrollable factor.', help:'Prevents the past moment from occupying the next one.'},
+      {id:'exercise', label:'What helped—or could help me regulate?', type:'text', ph:'A Regulation Bridge tool, breath, movement, cue, reset or support person.', help:'Builds your personal evidence-based reset toolbox.'},
+      {id:'reframe', label:'What is a more useful interpretation?', type:'text', ph:'What else could this moment mean?', help:'Creates flexibility without denying what happened.'}
     ]},
-    {id:'go', title:'6. GO — what do I want instead?', sub:'Train the response and state that would support your performance', fields:[
-      {id:'response', label:'Response', type:'text', ph:'How do I want to respond next time?'},
-      {id:'state', label:'State', type:'text', ph:'What state do I want to access instead?'},
-      {id:'performance2', label:'Performance', type:'text', ph:'What would be more useful for my performance?'}
-    ]},
-    {id:'ppi', title:'7. Prepare → Perform → Integrate', sub:'Use wherever it fits your training day', fields:[
-      {id:'prepare', label:'Prepare', type:'textarea', ph:'Before: emotions, thoughts, expectations, nerves?'},
-      {id:'perform', label:'Perform', type:'textarea', ph:'During: what happened? What shifted your state or performance?'},
-      {id:'integrate', label:'Integrate', type:'textarea', ph:'After: what did I learn? What pattern did I notice?'}
-    ]},
-    {id:'post', title:'8. Post-training reflection', sub:'Focus on specific moments — not just "good" or "bad"', fields:[
-      {id:'strongest', label:'Strongest moment', type:'text', ph:'When did I feel strongest?'},
-      {id:'shift', label:'Shift', type:'text', ph:'When did something shift?'},
-      {id:'trigger3', label:'Trigger', type:'text', ph:'What triggered the shift?'},
-      {id:'notice', label:'Notice', type:'text', ph:'Thoughts, emotions, body, behaviour?'},
-      {id:'next', label:'Next', type:'text', ph:'Something here I want to work on?'}
-    ]},
-    {id:'pattern-spot', title:'9. Pattern spotting', sub:'Recurring triggers become easier to recognize over time', fields:[
-      {id:'frequency', label:'Frequency', type:'text', ph:'First time, a few times, or regular?'},
-      {id:'trigger4', label:'Trigger', type:'text', ph:'What keeps showing up as a trigger?'},
-      {id:'automatic2', label:'Automatic', type:'text', ph:'What state / belief / reaction does it create?'},
-      {id:'performance3', label:'Performance', type:'text', ph:'What happens to my performance?'},
-      {id:'trained', label:'Trained response', type:'text', ph:'What response do I want to train instead?'}
-    ]},
-    {id:'takeaway', title:'10. One thing to take with me', sub:'Keep it small — one insight or one next step is enough', fields:[
-      {id:'remember', label:'Remember', type:'text', ph:'What do I want to remember from today?'},
-      {id:'nextstep', label:'Next step', type:'text', ph:'What is the one small thing to notice, practise, or choose next time?'}
+    {id:'go', title:'6. GO — Design the next experiment', sub:'Finish with one response you can practise, not a promise to “do better”',
+      when:'Complete at the end of the reflection and review it before the next relevant practice.',
+      why:'Reflection creates learning only when it changes what you notice, practise or choose next.',
+      later:'You can check whether the new response worked, refine it and build confidence from evidence.', fields:[
+      {id:'response', label:'How do I want to respond next time?', type:'text', ph:'Describe one observable response or decision.', help:'Turns insight into behaviour.'},
+      {id:'state', label:'What state would support that response?', type:'text', ph:'Calm, aggressive, playful, focused, patient, energised…', help:'Links the behaviour to the internal state you need.'},
+      {id:'cue', label:'What anchor will remind me?', type:'text', ph:'A word, gesture, breath, image or physical position.', help:'Makes the response easier to access under pressure.'},
+      {id:'next', label:'Where and when will I test it?', type:'text', ph:'Name the next specific training situation.', help:'Creates a clear experiment you can evaluate afterwards.'}
     ]}
   ];
 
@@ -525,7 +654,7 @@
   var state = loadState();
 
   function defaultState(){
-    return { startDate:null, regBridge:[], moduleLog:[], reflections:{}, livePractice:[], momentLog:[] };
+    return { startDate:null, regBridge:[], moduleLog:[], communicationLog:[], reflections:{}, learningModules:{}, learningTransitions:{}, livePractice:[], momentLog:[] };
   }
   function loadState(){
     try{
@@ -574,6 +703,7 @@
     var all = []
       .concat(state.regBridge.map(function(e){return e.date;}))
       .concat(state.moduleLog.map(function(e){return e.date;}))
+      .concat(state.communicationLog.map(function(e){return e.date;}))
       .concat(state.livePractice.map(function(e){return e.date;}))
       .concat(state.momentLog.map(function(e){return e.date;}));
     for(var i=0;i<all.length;i++){ if(weekOfDate(all[i])===n) return true; }
@@ -589,6 +719,19 @@
     document.querySelectorAll('.view').forEach(function(v){ v.classList.toggle('active', v.id===id); });
     tabBtns.forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-view')===id); });
     window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function setAccordionOpen(acc, open){
+    if(!acc) return;
+    acc.classList.toggle('open',open);
+    var head=acc.querySelector('.acc-head');
+    if(head) head.setAttribute('aria-expanded',open?'true':'false');
+  }
+  function openLiveSection(index){
+    showView('livepractice');
+    var cards=document.querySelectorAll('#liveAccordion .acc');
+    cards.forEach(function(card){setAccordionOpen(card,false);});
+    var target=index==='last'?cards[cards.length-1]:cards[index];
+    if(target){setAccordionOpen(target,true);target.scrollIntoView({behavior:'smooth',block:'start'});}
   }
 
   /* ---------------- Overview render ---------------- */
@@ -625,23 +768,25 @@
     var panel = document.getElementById('focusPanel');
     panel.innerHTML =
       '<div><div class="ftitle">Week '+w.n+' — '+PHASE_LABEL[w.phase]+'</div><div class="fmod">'+w.focus+'</div></div>' +
-      (w.moduleId ? '<button class="btn small" id="jumpModule">Log it now</button>' : '<button class="btn ghost small" id="jumpReflect">Open reflection</button>');
+      (w.moduleId ? '<button class="btn small" id="jumpModule">Log practice</button>' : (w.n===1 ? '<button class="btn ghost small" id="jumpReflect">Open Regulation</button>' : '<button class="btn ghost small" id="jumpReflect">Review sessions</button>'));
     var jm = document.getElementById('jumpModule');
     if(jm) jm.addEventListener('click', function(){
       showView('modulelog');
       document.getElementById('mlModule').value = w.moduleId;
     });
     var jr = document.getElementById('jumpReflect');
-    if(jr) jr.addEventListener('click', function(){ showView('modulelog'); });
+    if(jr) jr.addEventListener('click', function(){ showView(w.n===1?'regbridge':'modulelog'); });
   }
 
   function renderStats(){
-    var totalSessions = state.regBridge.length + state.moduleLog.length + state.livePractice.length + state.momentLog.length;
+    var totalSessions = state.regBridge.length + state.moduleLog.length + state.communicationLog.length + state.livePractice.length + state.momentLog.length;
+    var learningCycles = state.moduleLog.filter(function(e){return ENGINE_STEPS.every(function(s){return (e[s.id]||'').trim();});}).length;
     var cw = currentWeek();
     var grid = document.getElementById('statGrid');
     grid.innerHTML =
       stat(state.regBridge.length, 'Regulation Bridge sessions') +
       stat(totalSessions, 'Total logged sessions') +
+      stat(learningCycles, 'Learning cycles completed') +
       stat(cw ? ('Week '+cw+' / 12') : '—', cw ? 'Current week' : 'Set your start date');
   }
   function stat(num,lbl){
@@ -656,6 +801,7 @@
       html += '<div class="tally-row"><span class="name">'+m.name+'<span class="phase-chip">'+PHASE_LABEL[m.phase]+'</span></span><span class="count">'+count+'</span></div>';
     });
     html += '<div class="tally-row"><span class="name">Regulation Bridge<span class="phase-chip">Core tool</span></span><span class="count">'+state.regBridge.length+'</span></div>';
+    html += '<div class="tally-row"><span class="name">Communication checks<span class="phase-chip">Learning loop</span></span><span class="count">'+state.communicationLog.length+'</span></div>';
     el.innerHTML = html;
   }
 
@@ -664,25 +810,38 @@
 
   var REGBRIDGE_FIELDS = [
     {id:'date', label:'Date', type:'date'},
+    {id:'exercise', label:'Regulation exercise', type:'select', options:REGULATION_TOOLS},
+    {id:'rating', label:'How useful was it today? (1–5)', type:'select', options:['1','2','3','4','5']},
     {id:'note', label:'How it went', type:'text'}
   ];
   var MODULELOG_FIELDS = [
     {id:'date', label:'Date', type:'date'},
     {id:'module', label:'Module', type:'select', options:MODULES},
-    {id:'reps', label:'Reps', type:'text'}
+    {id:'reps', label:'Repetitions', type:'text'},
+    {id:'coreTool', label:'Core Tool used', type:'select', options:[''].concat(CORE_TOOLS)}
+  ].concat(ENGINE_STEPS.map(function(s){return {id:s.id,label:s.label+' — '+s.question,type:'textarea'};}));
+  var COMMLOG_FIELDS = [
+    {id:'date', label:'Date', type:'date'},
+    {id:'context', label:'Context', type:'select', options:['Training session / block','Competition','Workshop','Team meeting','Coach conversation','Other']},
+    {id:'moment', label:'Moment / round (optional)', type:'text'},
+    {id:'source', label:'Where did it appear?', type:'select', options:['Self-talk','Coach communication','Teammate communication','Team environment','Other']},
+    {id:'processes', label:'Which processes did I notice? Select all that apply.', type:'multicheck', options:['SAFE','PACE','STOP','CANT']},
+    {id:'event', label:'What happened or was said?', type:'textarea'},
+    {id:'missing', label:'What was missing?', type:'textarea'},
+    {id:'feel', label:'How did it make me feel?', type:'textarea'},
+    {id:'effect', label:'What effect did it have on learning or performance?', type:'textarea'},
+    {id:'need', label:'What did I need?', type:'select', options:['','More safety','More support','More clarity','More space','More challenge','Less pressure','Different language','The balance was right']},
+    {id:'fit', label:'How useful was the communication? (1–5)', type:'select', options:['','1','2','3','4','5']},
+    {id:'next', label:'What will we test or communicate next?', type:'text'}
   ];
   var MOMENTLOG_FIELDS = [
     {id:'date', label:'Date', type:'date'},
     {id:'stage', label:'Stage', type:'select', options:['Prepare','Perform','Pursue']},
-    {id:'situation', label:'Situation / trigger', type:'textarea'},
-    {id:'emotion', label:'Emotion', type:'text'},
-    {id:'thought', label:'Thought', type:'text'},
-    {id:'body', label:'Body', type:'text'},
-    {id:'reaction', label:'Reaction', type:'text'},
-    {id:'performance', label:'Performance impact', type:'text'},
-    {id:'pattern', label:'Pattern / belief', type:'text'},
-    {id:'exercise', label:'Exercise', type:'text'},
-    {id:'response', label:'Desired response', type:'text'}
+    {id:'situation', label:'What happened?', type:'text'},
+    {id:'notice', label:'What did I notice in myself?', type:'text'},
+    {id:'reaction', label:'What did I do?', type:'text'},
+    {id:'performance', label:'What was the performance effect?', type:'text'},
+    {id:'response', label:'What do I need or choose next?', type:'text'}
   ];
   var LIVE_FLAT_FIELDS = [];
   LIVE_SECTIONS.forEach(function(sec){
@@ -695,6 +854,13 @@
   function fieldControlHtml(prefix, f, value){
     value = value==null ? '' : value;
     var elId = prefix+'-'+f.id;
+    if(f.type==='multicheck'){
+      var selected=Array.isArray(value)?value:String(value||'').split(',').map(function(v){return v.trim();}).filter(Boolean);
+      return '<label>'+f.label+'</label><div class="check-grid">'+f.options.map(function(o,i){
+        var id=elId+'-'+i;
+        return '<label class="check-option" for="'+id+'"><input type="checkbox" id="'+id+'" data-key="'+f.id+'" value="'+o+'"'+(selected.indexOf(o)>=0?' checked':'')+'> '+o+'</label>';
+      }).join('')+'</div>';
+    }
     if(f.type==='textarea'){
       return '<label for="'+elId+'">'+f.label+'</label><textarea id="'+elId+'" data-key="'+f.id+'">'+esc(value)+'</textarea>';
     }
@@ -720,6 +886,7 @@
   function rerenderBucket(bucket){
     if(bucket==='regBridge') renderRegBridge();
     else if(bucket==='moduleLog') renderModuleLog();
+    else if(bucket==='communicationLog') renderCommunicationLog();
     else if(bucket==='livePractice') renderLiveList();
     else if(bucket==='momentLog') renderMomentLog();
   }
@@ -742,9 +909,15 @@
         var id = form.getAttribute('data-id');
         var entry = state[bucket].filter(function(e){ return e.id===id; })[0];
         if(entry){
+          var checkboxValues={};
           form.querySelectorAll('[data-key]').forEach(function(input){
-            entry[input.getAttribute('data-key')] = input.value.trim();
+            var key=input.getAttribute('data-key');
+            if(input.type==='checkbox'){
+              if(!checkboxValues[key]) checkboxValues[key]=[];
+              if(input.checked) checkboxValues[key].push(input.value);
+            }else entry[key] = input.value.trim();
           });
+          for(var key in checkboxValues) entry[key]=checkboxValues[key];
           saveState();
         }
         editing = null;
@@ -765,40 +938,64 @@
 
   /* ---------------- Regulation Bridge ---------------- */
   var formRB = document.getElementById('formRegBridge');
+  document.getElementById('rbExercise').innerHTML=REGULATION_TOOLS.map(function(tool){return '<option value="'+tool+'">'+tool+'</option>';}).join('');
   document.getElementById('rbDate').value = todayStr();
   formRB.addEventListener('submit', function(e){
     e.preventDefault();
-    state.regBridge.unshift({id:uid(), date:document.getElementById('rbDate').value, note:document.getElementById('rbNote').value.trim()});
+    state.regBridge.unshift({id:uid(),date:document.getElementById('rbDate').value,exercise:document.getElementById('rbExercise').value,rating:document.getElementById('rbRating').value,note:document.getElementById('rbNote').value.trim()});
     saveState();
     document.getElementById('rbNote').value='';
+    document.getElementById('rbRating').value='';
     document.getElementById('rbDate').value = todayStr();
     renderRegBridge(); renderOverview();
   });
   function renderRegBridge(){
     var list = document.getElementById('rbList');
-    if(!state.regBridge.length){ list.innerHTML = '<div class="empty-state">No entries yet. Log your first Regulation Bridge practice above.</div>'; return; }
-    list.innerHTML = state.regBridge.map(function(e){
-      if(isEditing('regBridge', e.id)) return '<div class="entry">'+buildEditForm('regBridge', e, REGBRIDGE_FIELDS)+'</div>';
-      return '<div class="entry"><div class="entry-top"><span class="entry-date">'+fmtDate(e.date)+'</span>'+actionBtns('regBridge', e.id)+'</div>' +
-        (e.note?'<div class="entry-body">'+esc(e.note)+'</div>':'') + '</div>';
+    if(!state.regBridge.length){ list.innerHTML = '<div class="empty-state">No entries yet. Log your first Regulation Bridge practice above.</div>'; }
+    else{
+      list.innerHTML = state.regBridge.map(function(e){
+        if(isEditing('regBridge', e.id)) return '<div class="entry">'+buildEditForm('regBridge', e, REGBRIDGE_FIELDS)+'</div>';
+        return '<div class="entry"><div class="entry-top"><span class="entry-date">'+fmtDate(e.date)+'</span><span class="entry-tag">'+esc(e.exercise||'Regulation Bridge')+(e.rating?' · '+esc(e.rating)+'/5':'')+'</span>'+actionBtns('regBridge', e.id)+'</div>' +
+          (e.note?'<div class="entry-body">'+esc(e.note)+'</div>':'') + '</div>';
+      }).join('');
+      wireEntryActions(list, 'regBridge');
+    }
+    var insights=document.getElementById('rbInsights');
+    insights.innerHTML=REGULATION_TOOLS.map(function(tool){
+      var entries=state.regBridge.filter(function(e){return e.exercise===tool;});
+      var ratings=entries.map(function(e){return Number(e.rating);}).filter(function(n){return n>0;});
+      var avg=ratings.length?(ratings.reduce(function(a,b){return a+b;},0)/ratings.length).toFixed(1):'—';
+      return '<div class="tally-row"><span class="name">'+tool+'</span><span class="count">'+entries.length+'× · '+avg+'/5</span></div>';
     }).join('');
-    wireEntryActions(list, 'regBridge');
   }
 
   /* ---------------- Module Log ---------------- */
   var mlSelect = document.getElementById('mlModule');
   mlSelect.innerHTML = MODULES.map(function(m){ return '<option value="'+m.id+'">'+m.name+'</option>'; }).join('');
+  var coreToolSelect=document.getElementById('mlCoreTool');
+  coreToolSelect.innerHTML='<option value="">None selected</option>'+CORE_TOOLS.map(function(tool){return '<option value="'+tool+'">'+tool+'</option>';}).join('');
+  var practiceLearningFields=document.getElementById('practiceLearningFields');
+  practiceLearningFields.innerHTML=ENGINE_STEPS.map(function(step){
+    return '<div class="loop-field"><label for="ml-'+step.id+'">'+step.label+' — '+step.question+'</label><input type="text" id="ml-'+step.id+'" placeholder="'+step.placeholder+'"></div>';
+  }).join('');
+  wireAccordions(document.getElementById('formModuleLog'));
   document.getElementById('mlDate').value = todayStr();
   document.getElementById('formModuleLog').addEventListener('submit', function(e){
     e.preventDefault();
-    state.moduleLog.unshift({
+    var entry={
       id:uid(),
       date:document.getElementById('mlDate').value,
       module:document.getElementById('mlModule').value,
-      reps:document.getElementById('mlReps').value.trim() || '1'
-    });
+      reps:document.getElementById('mlReps').value.trim() || '1',
+      coreTool:document.getElementById('mlCoreTool').value
+    };
+    ENGINE_STEPS.forEach(function(step){entry[step.id]=document.getElementById('ml-'+step.id).value.trim();});
+    state.moduleLog.unshift(entry);
     saveState();
     document.getElementById('mlReps').value='';
+    document.getElementById('mlCoreTool').value='';
+    ENGINE_STEPS.forEach(function(step){document.getElementById('ml-'+step.id).value='';});
+    setAccordionOpen(document.getElementById('practiceLearningAcc'),true);
     document.getElementById('mlDate').value = todayStr();
     renderModuleLog(); renderOverview();
   });
@@ -808,27 +1005,43 @@
     if(!state.moduleLog.length){ list.innerHTML = '<div class="empty-state">No entries yet. Log your first rep above.</div>'; return; }
     list.innerHTML = state.moduleLog.map(function(e){
       if(isEditing('moduleLog', e.id)) return '<div class="entry">'+buildEditForm('moduleLog', e, MODULELOG_FIELDS)+'</div>';
-      return '<div class="entry"><div class="entry-top"><span class="entry-date">'+fmtDate(e.date)+'</span><span class="entry-tag">'+moduleName(e.module)+' · '+esc(e.reps)+' rep(s)</span>'+actionBtns('moduleLog', e.id)+'</div></div>';
+      var done=ENGINE_STEPS.filter(function(step){return (e[step.id]||'').trim();}).length;
+      var summary=e.next||e.solutions||e.surprises||'';
+      return '<div class="entry"><div class="entry-top"><span class="entry-date">'+fmtDate(e.date)+'</span><span class="entry-tag">'+moduleName(e.module)+' · '+esc(e.reps)+' rep(s)'+(e.coreTool?' · '+esc(e.coreTool):'')+' · Learning '+done+'/6</span>'+actionBtns('moduleLog', e.id)+'</div>'+(summary?'<div class="entry-body">'+esc(summary)+'</div>':'')+'</div>';
     }).join('');
     wireEntryActions(list, 'moduleLog');
   }
 
-  /* ---------------- Reflection (part of the Module Log & Reflection tab) ---------------- */
-  function renderReflection(){
-    var el = document.getElementById('reflList');
-    el.innerHTML = MODULES.map(function(m){
-      var val = state.reflections[m.id] || '';
-      return '<div class="card refl-card">' +
-        '<div class="refl-head"><h3>'+m.name+'</h3><span class="badge" style="background:'+PHASE_COLOR[m.phase]+'">'+PHASE_LABEL[m.phase]+'</span></div>' +
-        '<textarea data-mod="'+m.id+'" placeholder="A line, a shift, a phrase that stuck…">'+esc(val)+'</textarea>' +
-        '</div>';
-    }).join('');
-    el.querySelectorAll('textarea').forEach(function(ta){
-      ta.addEventListener('change', function(){
-        state.reflections[ta.getAttribute('data-mod')] = ta.value;
-        saveState();
-      });
+  /* ---------------- Communication & Learning ---------------- */
+  document.getElementById('clDate').value=todayStr();
+  document.getElementById('formCommunication').addEventListener('submit',function(e){
+    e.preventDefault();
+    var processes=Array.prototype.map.call(document.querySelectorAll('input[name="clProcess"]:checked'),function(input){return input.value;});
+    if(!processes.length){alert('Select at least one process you noticed.');return;}
+    state.communicationLog.unshift({
+      id:uid(), date:document.getElementById('clDate').value||todayStr(), context:document.getElementById('clContext').value,
+      moment:document.getElementById('clMoment').value.trim(), source:document.getElementById('clSource').value, processes:processes,
+      event:document.getElementById('clEvent').value.trim(), missing:document.getElementById('clMissing').value.trim(),
+      feel:document.getElementById('clFeel').value.trim(), effect:document.getElementById('clEffect').value.trim(),
+      need:document.getElementById('clNeed').value, fit:document.getElementById('clFit').value, next:document.getElementById('clNext').value.trim()
     });
+    saveState();
+    ['clMoment','clEvent','clMissing','clFeel','clEffect','clNext'].forEach(function(id){document.getElementById(id).value='';});
+    ['clNeed','clFit'].forEach(function(id){document.getElementById(id).value='';});
+    document.querySelectorAll('input[name="clProcess"]').forEach(function(input){input.checked=false;});
+    document.getElementById('clDate').value=todayStr();
+    renderCommunicationLog();renderOverview();
+  });
+  function renderCommunicationLog(){
+    var list=document.getElementById('clList');
+    if(!state.communicationLog.length){list.innerHTML='<div class="empty-state">No communication checks saved yet.</div>';return;}
+    list.innerHTML=state.communicationLog.map(function(e){
+      if(isEditing('communicationLog',e.id)) return '<div class="entry">'+buildEditForm('communicationLog',e,COMMLOG_FIELDS)+'</div>';
+      var processes=Array.isArray(e.processes)?e.processes.join(' + '):(e.processes||'');
+      var tag=[e.context,processes,e.moment].filter(Boolean).map(esc).join(' · ');
+      return '<div class="entry"><div class="entry-top"><span class="entry-date">'+fmtDate(e.date)+'</span><span class="entry-tag">'+tag+'</span>'+actionBtns('communicationLog',e.id)+'</div><div class="mlog-grid">'+field('Where it appeared',e.source)+field('What happened',e.event)+field('What was missing',e.missing)+field('How it made me feel',e.feel)+field('Effect on learning / performance',e.effect)+field('What I needed',e.need)+field('Next experiment',e.next)+'</div></div>';
+    }).join('');
+    wireEntryActions(list,'communicationLog');
   }
 
   /* ---------------- Live Practice ---------------- */
@@ -839,17 +1052,20 @@
         var tag = f.type==='textarea' ? 'textarea' : (f.type==='date' ? 'input type="date"' : 'input type="text"');
         var close = f.type==='textarea' ? '</textarea>' : '';
         var ph = f.type==='date' ? '' : ' placeholder="'+f.ph+'"';
-        return '<label for="live-'+f.id+'">'+f.label+'</label><'+tag+' id="live-'+f.id+'"'+ph+'>'+close;
+        return '<label for="live-'+f.id+'">'+f.label+'</label><'+tag+' id="live-'+f.id+'"'+ph+'>'+close+(f.help?'<span class="field-help">Why capture this? '+f.help+'</span>':'');
       }).join('');
       return '<div class="acc'+(idx===0?' open':'')+'" data-idx="'+idx+'">' +
-        '<div class="acc-head"><div><div class="t">'+sec.title+'</div><div class="st">'+sec.sub+'</div></div><span class="chev">▾</span></div>' +
-        '<div class="acc-body">'+fieldsHtml+'</div></div>';
+        '<button type="button" class="acc-head" aria-expanded="'+(idx===0?'true':'false')+'"><div><div class="t">'+sec.title+'</div><div class="st">'+sec.sub+'</div></div><span class="chev">▾</span></button>' +
+        '<div class="acc-body"><div class="step-guide"><div><strong>WHEN</strong>'+sec.when+'</div><div><strong>WHY HERE</strong>'+sec.why+'</div><div><strong>USEFUL LATER</strong>'+sec.later+'</div></div>'+fieldsHtml+'</div></div>';
     }).join('');
-    el.querySelectorAll('.acc-head').forEach(function(h){
-      h.addEventListener('click', function(){ h.parentElement.classList.toggle('open'); });
-    });
+    wireAccordions(el);
     var dateField = document.getElementById('live-date');
     if(dateField && !dateField.value) dateField.value = todayStr();
+  }
+  function wireAccordions(container){
+    container.querySelectorAll('.acc-head').forEach(function(h){
+      h.addEventListener('click',function(){setAccordionOpen(h.parentElement,!h.parentElement.classList.contains('open'));});
+    });
   }
   document.getElementById('formLive').addEventListener('submit', function(e){
     e.preventDefault();
@@ -869,7 +1085,7 @@
         if(el) el.value = (f.id==='date') ? todayStr() : '';
       });
     });
-    document.querySelectorAll('#liveAccordion .acc').forEach(function(a,i){ a.classList.toggle('open', i===0); });
+    document.querySelectorAll('#liveAccordion .acc').forEach(function(a,i){ setAccordionOpen(a,i===0); });
     renderLiveList(); renderOverview();
     window.scrollTo({top:document.getElementById('livepractice').offsetTop,behavior:'smooth'});
   });
@@ -878,9 +1094,10 @@
     if(!state.livePractice.length){ list.innerHTML = '<div class="empty-state">No sessions saved yet.</div>'; return; }
     list.innerHTML = state.livePractice.map(function(e){
       if(isEditing('livePractice', e.id)) return '<div class="entry">'+buildEditForm('livePractice', e, LIVE_FLAT_FIELDS)+'</div>';
-      var summary = e.remember || e.pattern || e.situation || 'Session logged';
+      var snapshot=[e.emotion,e.thought,e.body,e.activation].filter(Boolean).join(' · ');
+      var pattern=[e.trigger2,e.automatic,e.pattern].filter(Boolean).join(' · ');
       return '<div class="entry"><div class="entry-top"><span class="entry-date">'+fmtDate(e.date)+'</span>'+actionBtns('livePractice', e.id)+'</div>' +
-        '<div class="entry-body">'+esc(summary)+'</div></div>';
+        '<div class="mlog-grid">'+field('Key moment',e.situation)+field('State snapshot',snapshot)+field('Pattern / trigger',pattern)+field('Regulation tool',e.exercise)+field('Next response',e.response)+field('Next experiment',e.next)+'</div></div>';
     }).join('');
     wireEntryActions(list, 'livePractice');
   }
@@ -894,18 +1111,14 @@
       date:document.getElementById('mmDate').value,
       stage:document.getElementById('mmStage').value,
       situation:document.getElementById('mmSituation').value.trim(),
-      emotion:document.getElementById('mmEmotion').value.trim(),
-      thought:document.getElementById('mmThought').value.trim(),
-      body:document.getElementById('mmBody').value.trim(),
+      notice:document.getElementById('mmNotice').value.trim(),
       reaction:document.getElementById('mmReaction').value.trim(),
       performance:document.getElementById('mmPerformance').value.trim(),
-      pattern:document.getElementById('mmPattern').value.trim(),
-      exercise:document.getElementById('mmExercise').value.trim(),
       response:document.getElementById('mmResponse').value.trim()
     };
     state.momentLog.unshift(entry);
     saveState();
-    ['mmSituation','mmEmotion','mmThought','mmBody','mmReaction','mmPerformance','mmPattern','mmExercise','mmResponse'].forEach(function(id){
+    ['mmSituation','mmNotice','mmReaction','mmPerformance','mmResponse'].forEach(function(id){
       document.getElementById(id).value='';
     });
     document.getElementById('mmDate').value = todayStr();
@@ -919,8 +1132,8 @@
       return '<div class="mlog-entry"><div class="entry-top"><span class="entry-date">'+fmtDate(e.date)+'</span><span class="entry-tag">'+esc(e.stage)+'</span>'+actionBtns('momentLog', e.id)+'</div>' +
         (e.situation?'<div class="entry-body">'+esc(e.situation)+'</div>':'') +
         '<div class="mlog-grid">' +
-          field('Emotion', e.emotion) + field('Thought', e.thought) + field('Body', e.body) + field('Reaction', e.reaction) +
-          field('Performance', e.performance) + field('Pattern / belief', e.pattern) + field('Exercise', e.exercise) + field('Desired response', e.response) +
+          field('What I noticed', e.notice || [e.emotion,e.thought,e.body].filter(Boolean).join(' · ')) + field('What I did', e.reaction) +
+          field('Performance effect', e.performance) + field('What I need next', e.response) +
         '</div></div>';
     }).join('');
     wireEntryActions(list, 'momentLog');
@@ -1046,6 +1259,7 @@
     }
     rows.forEach(function(rowArr, idx){
       var r = headerRow + 1 + idx;
+      var longestWrap=0;
       rowArr.forEach(function(val, c){
         var cell = ws.getCell(r, c+1);
         var def = colDefs[c] || {};
@@ -1056,10 +1270,12 @@
           cell.value = val || '';
         }
         cell.alignment = {vertical:'top', wrapText: def.type==='wrap'};
+        if(def.type==='wrap') longestWrap=Math.max(longestWrap,String(val||'').length);
         cell.font = {name:'Calibri', size:10.5, color:{argb:XLS_INK}};
         cell.border = {bottom:{style:'hair', color:{argb:XLS_BORDER}}};
         if(idx % 2 === 1) cell.fill = {type:'pattern', pattern:'solid', fgColor:{argb:XLS_ZEBRA}};
       });
+      ws.getRow(r).height=Math.min(78,Math.max(18,18+Math.ceil(longestWrap/55)*11));
     });
     ws.autoFilter = colLetter(1)+headerRow+':'+colLetter(headers.length)+headerRow;
     return ws;
@@ -1069,6 +1285,99 @@
     var wb = new ExcelJS.Workbook();
     wb.creator = 'Face Your Power';
     wb.created = new Date();
+
+    /* --- Athlete Dashboard --- */
+    var dash = wb.addWorksheet('Athlete Dashboard', {views:[{showGridLines:false}]});
+    dash.mergeCells('A1:H2');
+    var dashTitle=dash.getCell('A1');
+    dashTitle.value='FACE YOUR POWER — ATHLETE DASHBOARD';
+    dashTitle.font={name:'Calibri',size:20,bold:true,color:{argb:'FF2C2158'}};
+    dashTitle.fill={type:'pattern',pattern:'solid',fgColor:{argb:XLS_TINT}};
+    dashTitle.alignment={vertical:'middle'};
+    dash.mergeCells('A3:H3');
+    var dashSub=dash.getCell('A3');
+    dashSub.value='Your personal 12-week mental training picture — patterns are information, not judgement.';
+    dashSub.font={name:'Calibri',size:10.5,italic:true,color:{argb:XLS_INK_DIM}};
+    dashSub.fill={type:'pattern',pattern:'solid',fgColor:{argb:XLS_TINT_SOFT}};
+
+    var totalReps=state.moduleLog.reduce(function(sum,e){var n=parseFloat(e.reps);return sum+(isNaN(n)?0:n);},0);
+    var allRegRatings=state.regBridge.map(function(e){return Number(e.rating);}).filter(function(n){return n>0;});
+    var regAverage=allRegRatings.length?(allRegRatings.reduce(function(a,b){return a+b;},0)/allRegRatings.length).toFixed(1):'—';
+    var allLogged=state.regBridge.length+state.moduleLog.length+state.communicationLog.length+state.livePractice.length+state.momentLog.length;
+    var metrics=[
+      ['TOTAL LOGGED MOMENTS',allLogged],['PRACTICE ENTRIES',state.moduleLog.length],['REPETITIONS',totalReps],
+      ['DEEP REFLECTIONS',state.livePractice.length],['COMMUNICATION CHECKS',state.communicationLog.length],['REGULATION AVG.',regAverage==='—'?'—':regAverage+' / 5']
+    ];
+    metrics.forEach(function(m,i){
+      var row=i<3?5:8, col=(i%3)*3+1;
+      dash.mergeCells(row,col,row,col+1);dash.mergeCells(row+1,col,row+1,col+1);
+      var label=dash.getCell(row,col),value=dash.getCell(row+1,col);
+      label.value=m[0];label.font={name:'Calibri',size:9,bold:true,color:{argb:XLS_INK_DIM}};
+      label.fill={type:'pattern',pattern:'solid',fgColor:{argb:XLS_TINT_SOFT}};
+      label.alignment={horizontal:'center',vertical:'middle'};
+      value.value=m[1];value.font={name:'Calibri',size:18,bold:true,color:{argb:'FF2C2158'}};
+      value.fill={type:'pattern',pattern:'solid',fgColor:{argb:XLS_TINT}};
+      value.alignment={horizontal:'center',vertical:'middle'};
+      dash.getRow(row).height=18;dash.getRow(row+1).height=28;
+    });
+
+    function dashSection(row,title,endCol){
+      dash.mergeCells(row,1,row,endCol||8);
+      var c=dash.getCell(row,1);c.value=title;c.font={name:'Calibri',size:12,bold:true,color:{argb:'FF2C2158'}};
+      c.fill={type:'pattern',pattern:'solid',fgColor:{argb:XLS_TINT}};dash.getRow(row).height=20;
+    }
+    function dashHeader(row,labels){
+      labels.forEach(function(h,i){var c=dash.getCell(row,i+1);c.value=h;c.font={name:'Calibri',size:9.5,bold:true,color:{argb:'FFFFFFFF'}};c.fill={type:'pattern',pattern:'solid',fgColor:{argb:XLS_VIOLET}};c.alignment={wrapText:true,vertical:'middle'};});
+      dash.getRow(row).height=26;
+    }
+    function dashDataRow(row,values,zebra){
+      values.forEach(function(v,i){var c=dash.getCell(row,i+1);c.value=v;c.font={name:'Calibri',size:10,color:{argb:XLS_INK}};c.border={bottom:{style:'hair',color:{argb:XLS_BORDER}}};c.alignment={vertical:'top',wrapText:i===values.length-1};if(zebra)c.fill={type:'pattern',pattern:'solid',fgColor:{argb:XLS_ZEBRA}};});
+    }
+
+    dashSection(11,'Weekly activity');
+    dashHeader(12,['Week','Phase','Practice','Reps','Regulation','Communication','Deep','Quick']);
+    WEEKS.forEach(function(w,idx){
+      function countWeek(entries){return entries.filter(function(e){return weekOfDate(e.date)===w.n;}).length;}
+      var weekModules=state.moduleLog.filter(function(e){return weekOfDate(e.date)===w.n;});
+      var weekReps=weekModules.reduce(function(sum,e){var n=parseFloat(e.reps);return sum+(isNaN(n)?0:n);},0);
+      dashDataRow(13+idx,['Week '+w.n,PHASE_LABEL[w.phase],weekModules.length,weekReps,countWeek(state.regBridge),countWeek(state.communicationLog),countWeek(state.livePractice),countWeek(state.momentLog)],idx%2===1);
+    });
+
+    dashSection(27,'Regulation tools — use and usefulness');
+    dashHeader(28,['Tool','Times used','Average usefulness','','','','','']);
+    REGULATION_TOOLS.forEach(function(tool,idx){
+      var entries=state.regBridge.filter(function(e){return e.exercise===tool;});
+      var ratings=entries.map(function(e){return Number(e.rating);}).filter(function(n){return n>0;});
+      var avg=ratings.length?(ratings.reduce(function(a,b){return a+b;},0)/ratings.length).toFixed(1):'—';
+      dashDataRow(29+idx,[tool,entries.length,avg==='—'?'—':avg+' / 5','','','','',''],idx%2===1);
+    });
+
+    var commStart=30+REGULATION_TOOLS.length;
+    dashSection(commStart,'Communication patterns');
+    dashHeader(commStart+1,['Process','Times noticed','Average usefulness','Meaning','','','','']);
+    var processMeaning={SAFE:'Creates safety and connection',PACE:'Supports learning and possibility',STOP:'Turns experience into learning',CANT:'May move learning backwards — check impact and consent'};
+    ['SAFE','PACE','STOP','CANT'].forEach(function(process,idx){
+      var entries=state.communicationLog.filter(function(e){var ps=Array.isArray(e.processes)?e.processes:String(e.processes||'').split(',');return ps.indexOf(process)>=0;});
+      var ratings=entries.map(function(e){return Number(e.fit);}).filter(function(n){return n>0;});
+      var avg=ratings.length?(ratings.reduce(function(a,b){return a+b;},0)/ratings.length).toFixed(1):'—';
+      dashDataRow(commStart+2+idx,[process,entries.length,avg==='—'?'—':avg+' / 5',processMeaning[process],'','','',''],idx%2===1);
+    });
+
+    var nextStart=commStart+7;
+    dashSection(nextStart,'Latest next experiments');
+    dashHeader(nextStart+1,['Date','Area','Next action','','','','','']);
+    var nextItems=[];
+    state.moduleLog.forEach(function(e){if(e.next)nextItems.push({date:e.date,area:'Practice & Learn',text:e.next});});
+    state.communicationLog.forEach(function(e){if(e.next)nextItems.push({date:e.date,area:'Communication',text:e.next});});
+    state.livePractice.forEach(function(e){if(e.next||e.response)nextItems.push({date:e.date,area:'Deep Reflection',text:e.next||e.response});});
+    state.momentLog.forEach(function(e){if(e.response)nextItems.push({date:e.date,area:'Quick Moment',text:e.response});});
+    nextItems.sort(function(a,b){return String(b.date||'').localeCompare(String(a.date||''));}).slice(0,5).forEach(function(e,idx){dashDataRow(nextStart+2+idx,[e.date?new Date(e.date+'T00:00:00'):'',e.area,e.text,'','','','',''],idx%2===1);dash.getCell(nextStart+2+idx,1).numFmt='dd mmm yyyy';dash.getRow(nextStart+2+idx).height=30;});
+    if(!nextItems.length){dash.mergeCells(nextStart+2,1,nextStart+2,8);dash.getCell(nextStart+2,1).value='No next experiments captured yet.';dash.getCell(nextStart+2,1).font={italic:true,color:{argb:XLS_INK_DIM}};}
+
+    dash.getColumn(1).width=24;dash.getColumn(2).width=18;dash.getColumn(3).width=22;dash.getColumn(4).width=34;
+    dash.getColumn(5).width=16;dash.getColumn(6).width=18;dash.getColumn(7).width=14;dash.getColumn(8).width=14;
+    dash.views=[{state:'frozen',ySplit:3,showGridLines:false}];
+    dash.pageSetup={orientation:'landscape',fitToPage:true,fitToWidth:1,fitToHeight:0,margins:{left:0.3,right:0.3,top:0.5,bottom:0.5,header:0.2,footer:0.2}};
 
     /* --- Cover / Overview sheet --- */
     var ov = wb.addWorksheet('Overview', {views:[{showGridLines:false}]});
@@ -1173,54 +1482,80 @@
 
     /* --- Regulation Bridge --- */
     dataSheet(wb, 'Regulation Bridge', 'FACE YOUR POWER — Regulation Bridge Log',
-      'Core tool — practiced throughout all 12 weeks. Every entry counts, even the short version.',
-      ['Date','How it went'],
-      [{width:16,type:'date'},{width:65,type:'wrap'}],
-      state.regBridge.map(function(e){ return [e.date||'', e.note||'']; })
+      'Compare which regulation tool works best in which situation.',
+      ['Date','Regulation exercise','Usefulness rating (1–5)','What I noticed'],
+      [{width:16,type:'date'},{width:32},{width:22},{width:65,type:'wrap'}],
+      state.regBridge.map(function(e){ return [e.date||'',e.exercise||'Regulation Bridge',e.rating||'',e.note||'']; })
     );
 
-    /* --- Module Log --- */
-    dataSheet(wb, 'Module Log', 'FACE YOUR POWER — Module Log',
-      'SEE × FREE × GO across Prepare, Perform and Pursue.',
-      ['Date','Module','Reps'],
-      [{width:16,type:'date'},{width:22},{width:10}],
-      state.moduleLog.map(function(e){ return [e.date||'', moduleName(e.module), e.reps||'']; })
+    dataSheet(wb, 'Regulation Summary', 'FACE YOUR POWER — Regulation Toolbox Summary',
+      'Use repetition count and average usefulness as evidence—not as a judgement of the exercise or athlete.',
+      ['Regulation exercise','Practices logged','Average usefulness (1–5)'],
+      [{width:34},{width:18},{width:26}],
+      REGULATION_TOOLS.map(function(tool){
+        var entries=state.regBridge.filter(function(e){return e.exercise===tool;});
+        var ratings=entries.map(function(e){return Number(e.rating);}).filter(function(n){return n>0;});
+        var avg=ratings.length?(ratings.reduce(function(a,b){return a+b;},0)/ratings.length).toFixed(1):'';
+        return [tool,entries.length,avg];
+      })
     );
 
-    /* --- Reflection --- */
-    dataSheet(wb, 'Reflection', 'FACE YOUR POWER — My Reflection',
-      'What I want to remember from each module.',
-      ['Module','What I want to remember'],
-      [{width:20},{width:75,type:'wrap'}],
-      MODULES.map(function(m){ return [m.name, state.reflections[m.id]||'']; })
+    /* --- Practice & Learning --- */
+    dataSheet(wb, 'Practice & Learn', 'FACE YOUR POWER — Practice & Learn',
+      'Every practice counts. The six Learning Engine questions are optional and used when a session provides useful learning.',
+      ['Date','Module','Repetitions','Core Tool used','Learning completed','Goals','Difficulties','Solutions','Surprises','How do I feel?','What do I want to try next?'],
+      [{width:16,type:'date'},{width:22},{width:12},{width:24},{width:18},{width:30,type:'wrap'},{width:32,type:'wrap'},{width:34,type:'wrap'},{width:32,type:'wrap'},{width:34,type:'wrap'},{width:36,type:'wrap'}],
+      state.moduleLog.map(function(e){ var n=ENGINE_STEPS.filter(function(s){return (e[s.id]||'').trim();}).length; return [e.date||'',moduleName(e.module),e.reps||'',e.coreTool||'',n+'/6',e.goal||'',e.difficulties||'',e.solutions||'',e.surprises||'',e.feel||'',e.next||'']; }),
+      {freezeCol:true}
     );
 
-    /* --- Live Practice --- */
-    var liveHeaders = ['Date'];
-    var liveFieldIds = [];
-    LIVE_SECTIONS.forEach(function(sec){
-      var prefix = sec.title.replace(/^\d+\.\s*/, '');
-      sec.fields.forEach(function(f){
-        if(f.id === 'date') return;
-        liveFieldIds.push(f.id);
-        liveHeaders.push(prefix + ': ' + f.label);
+    /* --- Communication & Learning --- */
+    dataSheet(wb, 'Communication', 'FACE YOUR POWER — Communication & Learning',
+      'One row per communication moment. Select several processes when SAFE, PACE, STOP or CANT appear together; save another check when they recur later.',
+      ['Date','Context','Moment / round','Processes noticed','Where did it appear?','What happened / was said?','What was missing?','How did it make me feel?','Effect on learning / performance','What did I need?','Communication usefulness (1–5)','What will we test / communicate next?'],
+      [{width:16,type:'date'},{width:24},{width:20},{width:24},{width:25},{width:42,type:'wrap'},{width:36,type:'wrap'},{width:34,type:'wrap'},{width:42,type:'wrap'},{width:24},{width:26},{width:42,type:'wrap'}],
+      state.communicationLog.map(function(e){return [e.date||'',e.context||'',e.moment||'',(Array.isArray(e.processes)?e.processes.join(' · '):e.processes)||'',e.source||'',e.event||'',e.missing||'',e.feel||'',e.effect||'',e.need||'',e.fit||'',e.next||''];}),
+      {freezeCol:true}
+    );
+
+    /* --- Deep Reflection: concise learning summary --- */
+    dataSheet(wb, 'Deep Reflection Summary', 'FACE YOUR POWER — Deep Reflection Summary',
+      'One row per reflection: the information most useful for comparing patterns and next experiments.',
+      ['Date','Training / competition','Conditions','Key moment','State snapshot','Pattern / trigger','What I can control','What I release','Regulation tool','Next response','Anchor','Where I will test it'],
+      [{width:16,type:'date'},{width:24,type:'wrap'},{width:26,type:'wrap'},{width:38,type:'wrap'},{width:38,type:'wrap'},{width:34,type:'wrap'},{width:30,type:'wrap'},{width:30,type:'wrap'},{width:30,type:'wrap'},{width:34,type:'wrap'},{width:22,type:'wrap'},{width:32,type:'wrap'}],
+      state.livePractice.map(function(e){
+        var snapshot=[e.emotion,e.thought,e.body,e.activation].filter(Boolean).join(' · ');
+        var pattern=[e.trigger2,e.automatic,e.pattern].filter(Boolean).join(' · ');
+        return [e.date||'',e.type||'',e.where||'',e.situation||'',snapshot,pattern,e.control||'',e.release||'',e.exercise||'',e.response||'',e.cue||'',e.next||''];
+      }),
+      {freezeCol:true}
+    );
+
+    /* --- Deep Reflection: filterable question-and-answer log --- */
+    var deepDetailRows=[];
+    state.livePractice.forEach(function(e){
+      LIVE_SECTIONS.forEach(function(sec){
+        sec.fields.forEach(function(f){
+          if(f.id==='date'||!(e[f.id]||'').trim()) return;
+          deepDetailRows.push([e.date||'',sec.title,f.label,e[f.id]]);
+        });
       });
     });
-    var liveColDefs = [{width:16,type:'date'}].concat(liveFieldIds.map(function(){ return {width:30,type:'wrap'}; }));
-    dataSheet(wb, 'Live Practice', 'FACE YOUR POWER — Live Practice Tracker',
-      'SEE what is happening. FREE what gets in the way. GO with what you need.',
-      liveHeaders, liveColDefs,
-      state.livePractice.map(function(e){ return [e.date||''].concat(liveFieldIds.map(function(id){ return e[id]||''; })); }),
+    dataSheet(wb, 'Deep Reflection Detail', 'FACE YOUR POWER — Deep Reflection Detail Log',
+      'Filter by date, reflection step or question to compare learning across sessions.',
+      ['Date','Reflection step','Question','Answer'],
+      [{width:16,type:'date'},{width:34,type:'wrap'},{width:42,type:'wrap'},{width:75,type:'wrap'}],
+      deepDetailRows,
       {freezeCol:true}
     );
 
     /* --- Moment Log --- */
-    dataSheet(wb, 'Moment Log', 'FACE YOUR POWER — Moment Log',
-      'Notice it → capture it → keep training.',
-      ['Date','Stage','Situation / trigger','Emotion','Thought','Body','Reaction','Performance','Pattern / belief','Exercise','Desired response'],
-      [{width:16,type:'date'},{width:12},{width:34,type:'wrap'},{width:20,type:'wrap'},{width:26,type:'wrap'},{width:22,type:'wrap'},{width:22,type:'wrap'},{width:24,type:'wrap'},{width:26,type:'wrap'},{width:24,type:'wrap'},{width:30,type:'wrap'}],
+    dataSheet(wb, 'Quick Moments', 'FACE YOUR POWER — Quick Moments',
+      'Capture what is useful in 30–60 seconds, then continue training.',
+      ['Date','Stage','What happened?','What did I notice?','What did I do?','Performance effect','What do I need or choose next?'],
+      [{width:16,type:'date'},{width:12},{width:34,type:'wrap'},{width:34,type:'wrap'},{width:24,type:'wrap'},{width:28,type:'wrap'},{width:34,type:'wrap'}],
       state.momentLog.map(function(e){
-        return [e.date||'', e.stage||'', e.situation||'', e.emotion||'', e.thought||'', e.body||'', e.reaction||'', e.performance||'', e.pattern||'', e.exercise||'', e.response||''];
+        return [e.date||'',e.stage||'',e.situation||'',e.notice||[e.emotion,e.thought,e.body].filter(Boolean).join(' · '),e.reaction||'',e.performance||'',e.response||''];
       }),
       {freezeCol:true}
     );
@@ -1229,7 +1564,7 @@
       var blob = new Blob([buffer], {type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
       var url = URL.createObjectURL(blob);
       var a = document.createElement('a');
-      a.href = url; a.download = 'face-your-power-tracker-export.xlsx';
+      a.href = url; a.download = 'face-your-power-athlete-results-'+todayStr()+'.xlsx';
       document.body.appendChild(a); a.click(); document.body.removeChild(a);
       URL.revokeObjectURL(url);
     });
@@ -1240,7 +1575,7 @@
     renderOverview();
     renderRegBridge();
     renderModuleLog();
-    renderReflection();
+    renderCommunicationLog();
     renderLiveList();
     renderMomentLog();
   }
